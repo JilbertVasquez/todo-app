@@ -1,0 +1,26 @@
+<mat-toolbar color="primary" class="flex justify-between items-center px-2">
+  <div>
+    <a [routerLink]="['/']" mat-button>Home</a>
+  </div>
+  <div>
+    <div *ngIf="isLoggedIn">
+      <button mat-button [matMenuTriggerFor]="me">
+        <mat-icon>arrow_drop_down</mat-icon>
+        Hi, Jilbert
+      </button>
+    
+      <mat-menu #me="matMenu">
+        <a mat-menu-item routerLink="./tasks">My Tasks</a>
+        <button mat-button (click)="logout()" class="w-full">
+          Logout
+        </button>
+      </mat-menu>
+    </div>
+    <div *ngIf="!isLoggedIn">
+      <button (click)="login()">
+        Login
+      </button>
+    </div>
+  </div>
+
+</mat-toolbar>
