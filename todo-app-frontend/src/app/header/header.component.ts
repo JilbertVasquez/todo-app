@@ -14,7 +14,7 @@ import { Router, RouterModule } from '@angular/router';
     styleUrl: './header.component.css',
 })
 export class HeaderComponent {
-    isLoggedIn = false;
+    isLoggedIn = true;
 
     constructor(private _router: Router) {}
 
