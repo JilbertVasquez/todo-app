@@ -1,0 +1,92 @@
+[
+    {
+        "id": 1,
+        "title": "Fix bugs in the login system",
+        "status": "In Progress",
+        "priorityType": "Critical"
+    },
+    {
+        "id": 2,
+        "title": "Implement user authentication",
+        "status": "Complete",
+        "priorityType": "High"
+    },
+    {
+        "id": 3,
+        "title": "Design the new homepage layout",
+        "status": "Todo",
+        "priorityType": "Major"
+    },
+    {
+        "id": 4,
+        "title": "Create API documentation",
+        "status": "In Progress",
+        "priorityType": "Normal"
+    },
+    {
+        "id": 5,
+        "title": "Setup continuous integration",
+        "status": "Todo",
+        "priorityType": "High"
+    },
+    {
+        "id": 6,
+        "title": "Write unit tests for user module",
+        "status": "Complete",
+        "priorityType": "Normal"
+    },
+    {
+        "id": 7,
+        "title": "Optimize database queries",
+        "status": "In Progress",
+        "priorityType": "Critical"
+    },
+    {
+        "id": 8,
+        "title": "Conduct user testing sessions",
+        "status": "Todo",
+        "priorityType": "Major"
+    },
+    {
+        "id": 9,
+        "title": "Refactor payment gateway integration",
+        "status": "In Progress",
+        "priorityType": "High"
+    },
+    {
+        "id": 10,
+        "title": "Create a marketing plan for launch",
+        "status": "Todo",
+        "priorityType": "Normal"
+    },
+    {
+        "id": 11,
+        "title": "Update the privacy policy document",
+        "status": "Complete",
+        "priorityType": "Normal"
+    },
+    {
+        "id": 12,
+        "title": "Prepare presentation for stakeholders",
+        "status": "In Progress",
+        "priorityType": "Major"
+    },
+    {
+        "id": 13,
+        "title": "Implement analytics tracking",
+        "status": "Todo",
+        "priorityType": "High"
+    },
+    {
+        "id": 14,
+        "title": "Launch the mobile application",
+        "status": "In Progress",
+        "priorityType": "Critical"
+    },
+    {
+        "id": 15,
+        "title": "Gather feedback from beta users",
+        "status": "Complete",
+        "priorityType": "Normal"
+    }   
+]

@@ -5,6 +5,7 @@ import { TasksDashboardComponent } from './tasks-dashboard/tasks-dashboard.compo
 import { TasksListsComponent } from './tasks-dashboard/tasks-lists/tasks-lists.component';
 import { TasksDetailsComponent } from './tasks-dashboard/tasks-details/tasks-details.component';
 import { CreateTaskComponent } from './tasks-dashboard/create-task/create-task.component';
+import { loadTasksResolver } from '../_resolvers/tasks-resolver';
 
 export default [
   {
@@ -18,6 +19,7 @@ export default [
       {
         path: 'tasks-dashboard',
         component: TasksDashboardComponent,
+        resolve: { loadTask: loadTasksResolver }
       },
       {
         path: 'tasks-lists',
