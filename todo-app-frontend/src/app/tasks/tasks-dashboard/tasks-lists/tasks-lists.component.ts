@@ -42,15 +42,33 @@ export class TasksListsComponent implements OnInit {
   ];
 
   selectedFilter: string = this.priorities[4].name;
-  taskList: Signal<TaskListDto[]>;
+  // taskList: Signal<TaskListDto[]>;
+  filteredTaskList: TaskListDto[] = [];
+  select = '';
 
   constructor(private _tasksService: TasksService, private _dialog: DialogService) {
-    this.taskList = _tasksService.taskList.asReadonly();
+    // this.filteredTaskList = _tasksService.taskList();
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    // this.filteredTaskList = this.taskList();
+    this.filteredTaskList = this._tasksService.taskList();
+  }
 
   createTask() {
     this._dialog.taskDialog();
   }
+
+  getFilterInput(event: Event) {
+    const inputValue = (event.target as HTMLInputElement).value;
+
+    this.filteredTaskList = this._filterTaskList(inputValue);
+  }
+
+  private _filterTaskList(input: string) {
+    if (!input) return this._tasksService.taskList();
+
+    return  this.filteredTaskList.filter((task) => task.title.toLowerCase().includes(input.toLowerCase()))
+  }
+
 }

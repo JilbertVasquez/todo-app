@@ -9,7 +9,8 @@
                     </div>
 
                     <mat-form-field appearance="fill">
-                        <input matInput type="text" placeholder="filter...">
+                        <mat-label>Filter</mat-label>
+                        <input matInput placeholder="Search Title..." (keyup)="getFilterInput($event)">
                     </mat-form-field>
                     
                     <form>
@@ -26,8 +27,8 @@
             <mat-card-content class="!flex gap-2.5 flex-wrap overflow-auto !p-3 !h-full">
                 <mat-card 
                     appearance="outlined" 
-                    class="w-[330px] min-h-[150px] gap-3"
-                    *ngFor="let task of taskList()"
+                    class="w-[330px] min-h-[180px] max-h-[180px] gap-3"
+                    *ngFor="let task of filteredTaskList"
                     >
                     <mat-card-header>
                         <div class="flex items-center justify-center] w-full">
