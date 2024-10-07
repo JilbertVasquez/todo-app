@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { TasksService } from '../../../_services/tasks.service';
 import { TaskListDto } from '../../../_dtos/task-list-dto';
+import { DialogService } from '../../../_services/dialog.service';
 
 @Component({
   selector: 'app-tasks-lists',
@@ -43,10 +44,13 @@ export class TasksListsComponent implements OnInit {
   selectedFilter: string = this.priorities[4].name;
   taskList: Signal<TaskListDto[]>;
 
-  constructor(private tasksService: TasksService) {
-    this.taskList = tasksService.taskList.asReadonly();
+  constructor(private _tasksService: TasksService, private _dialog: DialogService) {
+    this.taskList = _tasksService.taskList.asReadonly();
   }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  createTask() {
+    this._dialog.taskDialog();
   }
 }
