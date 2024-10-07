@@ -1,24 +1,9 @@
 <div class="h-full">
-    <div class="p-4 h-full">
+    <div class="p-2 h-full">
         <mat-card appearance="outlined" class="h-full !bg-white !border-white">
-            <mat-card-content>
-                <div class="flex justify-between p-2 w-2/5">
-                    <div>
-                        <button mat-raised-button>Add Task</button>
-                    </div>
-                    <div class="">
-                        <ul class="flex flex-col flex-wrap gap-2 max-h-20 w-[300px]">
-                            <li *ngFor="let prio of priorities">{{prio.name}}</li>
-                        </ul>
-                    </div>
-                </div>
-            </mat-card-content>
-
-            <div class="p-2.5 h-full">
                 <mat-card-content class="h-full">
                     <app-tasks-lists></app-tasks-lists>
                 </mat-card-content>
-            </div>
         </mat-card>
     </div>
 </div>

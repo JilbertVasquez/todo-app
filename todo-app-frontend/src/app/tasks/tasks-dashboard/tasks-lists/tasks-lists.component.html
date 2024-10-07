@@ -3,6 +3,11 @@
         <mat-card appearance="outlined" class="h-full !bg-slate-50">
             <mat-card-content>
                 <div class="flex gap-10">
+
+                    <div class="flex justify-center mt-2">
+                        <button mat-raised-button>Add Task</button>
+                    </div>
+
                     <mat-form-field appearance="fill">
                         <input matInput type="text" placeholder="filter...">
                     </mat-form-field>
@@ -19,7 +24,7 @@
             </mat-card-content>
 
             <mat-card-content class="!flex gap-2.5 flex-wrap overflow-auto !p-3 !h-full">
-                 <mat-card 
+                <mat-card 
                     appearance="outlined" 
                     class="w-[300px] min-h-[150px] gap-3"
                     *ngFor="let task of taskList()"

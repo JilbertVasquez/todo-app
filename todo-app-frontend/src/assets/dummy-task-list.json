@@ -88,5 +88,65 @@
         "title": "Gather feedback from beta users",
         "status": "Complete",
         "priorityType": "Normal"
-    }   
+    },
+    {
+        "id": 16,
+        "title": "Integrate new payment methods",
+        "status": "Todo",
+        "priorityType": "High"
+    },
+    {
+        "id": 17,
+        "title": "Migrate data to cloud infrastructure",
+        "status": "In Progress",
+        "priorityType": "Critical"
+    },
+    {
+        "id": 18,
+        "title": "Research alternative CDN providers",
+        "status": "Todo",
+        "priorityType": "Normal"
+    },
+    {
+        "id": 19,
+        "title": "Refactor legacy codebase",
+        "status": "In Progress",
+        "priorityType": "Major"
+    },
+    {
+        "id": 20,
+        "title": "Create a tutorial for new developers",
+        "status": "Todo",
+        "priorityType": "Normal"
+    },
+    {
+        "id": 21,
+        "title": "Implement OAuth2 authentication",
+        "status": "In Progress",
+        "priorityType": "High"
+    },
+    {
+        "id": 22,
+        "title": "Upgrade system to PHP 8",
+        "status": "Complete",
+        "priorityType": "Critical"
+    },
+    {
+        "id": 23,
+        "title": "Localize the application for new markets",
+        "status": "Todo",
+        "priorityType": "Major"
+    },
+    {
+        "id": 24,
+        "title": "Redesign user profile page",
+        "status": "In Progress",
+        "priorityType": "High"
+    },
+    {
+        "id": 25,
+        "title": "Setup disaster recovery plan",
+        "status": "Todo",
+        "priorityType": "Critical"
+    }
 ]
