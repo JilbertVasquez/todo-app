@@ -41,18 +41,25 @@ export class TasksListsComponent implements OnInit {
     { name: 'Minor' }
   ];
 
-  selectedFilter: string = this.priorities[4].name;
-  // taskList: Signal<TaskListDto[]>;
+  status = [
+    { name: 'All' },
+    { name: 'Todo' },
+    { name: 'In Progress' },
+    { name: 'Complete' },
+  ];
+
+  selectedPriority: string = 'All';
+  selectedStatus: string = 'All';
+  taskList: Signal<TaskListDto[]>;
   filteredTaskList: TaskListDto[] = [];
-  select = '';
+  inputValue: string = '';
 
   constructor(private _tasksService: TasksService, private _dialog: DialogService) {
-    // this.filteredTaskList = _tasksService.taskList();
+    this.taskList = _tasksService.taskList.asReadonly();
   }
 
   ngOnInit() {
-    // this.filteredTaskList = this.taskList();
-    this.filteredTaskList = this._tasksService.taskList();
+    this.filteredTaskList = this.taskList();
   }
 
   createTask() {
@@ -60,15 +67,26 @@ export class TasksListsComponent implements OnInit {
   }
 
   getFilterInput(event: Event) {
-    const inputValue = (event.target as HTMLInputElement).value;
+    this.inputValue = (event.target as HTMLInputElement).value;
 
-    this.filteredTaskList = this._filterTaskList(inputValue);
+    this._filterTasks();
   }
 
-  private _filterTaskList(input: string) {
-    if (!input) return this._tasksService.taskList();
-
-    return  this.filteredTaskList.filter((task) => task.title.toLowerCase().includes(input.toLowerCase()))
+  onPriorityChange() {
+    this._filterTasks();
   }
 
+  onStatusChange() {
+    this._filterTasks();
+  }
+
+  private _filterTasks() {
+    this.filteredTaskList = this.taskList().filter(task => {
+      const filteredTitle = task.title.toLowerCase().includes(this.inputValue.toLowerCase());
+      const filteredPriority = this.selectedPriority.toLowerCase() === 'all' || task.priorityType.toLowerCase() === this.selectedPriority.toLowerCase();
+      const filteredStatus = this.selectedStatus.toLowerCase() === 'all' || task.status.toLowerCase() === this.selectedStatus.toLowerCase();
+
+      return filteredTitle && filteredPriority && filteredStatus;
+    });
+  }
 }
