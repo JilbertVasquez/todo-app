@@ -5,14 +5,14 @@
                 <div class="flex gap-10">
 
                     <div class="flex justify-center mt-2">
-                        <button mat-raised-button (click)="createTask()">Add Task</button>
+                        <button mat-raised-button [routerLink]="['../create-task']" routerLinkActive="router-link-active" >Add Task</button>
                     </div>
 
                     <mat-form-field appearance="fill">
                         <mat-label>Filter</mat-label>
                         <input matInput placeholder="Search Title..." (keyup)="getFilterInput($event)">
                     </mat-form-field>
-                    
+
                     <form>
                         <mat-form-field appearance="fill">
                             <mat-label>Select Priority</mat-label>
@@ -34,8 +34,8 @@
             </mat-card-content>
 
             <mat-card-content class="!flex gap-2.5 flex-wrap overflow-auto">
-                <mat-card 
-                    appearance="outlined" 
+                <mat-card
+                    appearance="outlined"
                     class="w-[330px] min-h-[180px] max-h-[180px]"
                     *ngFor="let task of filteredTaskList"
                     >
@@ -63,7 +63,7 @@
                         </mat-chip-set>
                     </mat-card-content>
                 </mat-card>
-                
+
             </mat-card-content>
         </mat-card>
     </div>

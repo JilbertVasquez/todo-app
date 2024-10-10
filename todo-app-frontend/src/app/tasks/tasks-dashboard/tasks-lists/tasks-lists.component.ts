@@ -12,6 +12,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {TasksService} from '../../../_services/tasks.service';
 import {TaskListDto} from '../../../_dtos/task-list-dto';
 import {DialogService} from '../../../_services/dialog.service';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
     selector: 'app-tasks-lists',
@@ -28,6 +29,7 @@ import {DialogService} from '../../../_services/dialog.service';
         FormsModule,
         MatInputModule,
         MatChipsModule,
+        RouterModule
     ],
     templateUrl: './tasks-lists.component.html',
     styleUrl: './tasks-lists.component.css',
@@ -57,7 +59,8 @@ export class TasksListsComponent implements OnInit {
 
     constructor(
         private _tasksService: TasksService,
-        private _dialog: DialogService
+        private _dialog: DialogService,
+        private _router: Router
     ) {
         this.taskList = _tasksService.taskList.asReadonly();
     }
@@ -66,9 +69,9 @@ export class TasksListsComponent implements OnInit {
         this.filteredTaskList = this.taskList();
     }
 
-    createTask() {
-        this._dialog.taskDialog();
-    }
+    // createTask() {
+    //     this._router.navigate(['/tasks/create-task']);
+    // }
 
     getFilterInput(event: Event) {
         this.inputValue = (event.target as HTMLInputElement).value;

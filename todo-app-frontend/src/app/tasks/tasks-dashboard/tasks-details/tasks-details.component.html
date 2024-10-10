@@ -1,1 +1,39 @@
-<p>tasks-details works!</p>
+<div class="p-5 h-full !text-white flex justify-center items-center">
+    <mat-card class="w-[70%] h-[90%]">
+        <mat-card-title class="p-5">{{toCreate ? 'Create Task' : 'Edit Task'}}</mat-card-title>
+        <mat-card-content class="h-full">
+            <form class="h-fullp-2">
+                <mat-form-field appearance="outline" class="w-full">
+                    <mat-label>Title</mat-label>
+                    <input matInput placeholder="Title..." value="{{title}}">
+                </mat-form-field>
+
+                <div class="flex justify-between items-start">
+                    <div class="flex gap-3">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Select Priority</mat-label>
+                            <mat-select [(ngModel)]="selectedPriority" name="priority">
+                                <mat-option *ngFor="let prio of priorities" [value]="prio">{{prio}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Select Status</mat-label>
+                            <mat-select [(ngModel)]="selectedStatus" name="status">
+                                <mat-option *ngFor="let stat of status" [value]="stat">{{stat}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="mt-2">
+                        <button mat-flat-button>{{toCreate ? 'Create' : 'Update'}}</button>
+                    </div>
+                </div>
+
+                <mat-form-field appearance="outline" class="w-full">
+                    <mat-label>Task ToDo</mat-label>
+                    <textarea matInput placeholder="input task..." rows="20" value="{{note}}"></textarea>
+                </mat-form-field>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

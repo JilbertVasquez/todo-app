@@ -9,3 +9,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mdc-notched-outline__notch {
     border-right: none;
 }
+
+.mat-dialog-container {
+    max-width: none !important;
+    max-height: none !important;
+}
+/* 
+.mat-mdc-form-field-textarea-control {
+    height: 500px !important;
+    background-color: red !important;
+} */
