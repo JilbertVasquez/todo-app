@@ -26,7 +26,11 @@ export class HeaderComponent {
     constructor(private _router: Router) {}
 
     login() {
-        this.isLoggedIn = !this.isLoggedIn;
+        this._router.navigate(['/login']);
+    }
+
+    signup() {
+        this._router.navigate(['signup']);
     }
 
     logout() {
