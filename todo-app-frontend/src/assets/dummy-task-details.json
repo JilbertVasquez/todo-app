@@ -1,0 +1,7 @@
+{
+    "id": 1,
+    "title": "Fix bugs in the login system",
+    "note": "Fix bugs for user to able to login",
+    "status": "In Progress",
+    "priorityType": "Critical"
+}

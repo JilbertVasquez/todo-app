@@ -26,13 +26,13 @@ export default [
                 component: TasksListsComponent,
             },
             {
-                path: 'tasks-details',
-                component: TasksDetailsComponent,
-            },
-            {
-                path: 'create-task',
+                path: 'create-task/:mode',
                 component: CreateTaskComponent,
             },
+            {
+                path: 'edit-tasks/:mode/:id',
+                component: TasksDetailsComponent
+            }
         ],
     },
 ] as Routes;

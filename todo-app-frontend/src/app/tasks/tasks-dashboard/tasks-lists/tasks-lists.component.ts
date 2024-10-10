@@ -12,7 +12,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {TasksService} from '../../../_services/tasks.service';
 import {TaskListDto} from '../../../_dtos/task-list-dto';
 import {DialogService} from '../../../_services/dialog.service';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 @Component({
     selector: 'app-tasks-lists',
@@ -60,13 +60,18 @@ export class TasksListsComponent implements OnInit {
     constructor(
         private _tasksService: TasksService,
         private _dialog: DialogService,
-        private _router: Router
+        private _router: Router,
+        private _route: ActivatedRoute
     ) {
         this.taskList = _tasksService.taskList.asReadonly();
     }
 
     ngOnInit() {
         this.filteredTaskList = this.taskList();
+    }
+
+    editTask(taskId: number) {
+        this._router.navigate(['../edit-tasks/edit', taskId], {relativeTo: this._route});
     }
 
     // createTask() {

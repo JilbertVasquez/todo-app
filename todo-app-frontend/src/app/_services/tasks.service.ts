@@ -3,6 +3,7 @@ import { environment } from "../../environments/environment.development";
 import { HttpClient } from "@angular/common/http";
 import { lastValueFrom } from "rxjs";
 import { TaskListDto } from "../_dtos/task-list-dto";
+import { TaskDto } from "../_dtos/task-dto";
 
 @Injectable({
     providedIn: "root"
@@ -22,5 +23,9 @@ export class TasksService {
     async loadTasks() {
         const taskList = await this.getTasks();
         this.taskList.set(taskList);
+    }
+
+    async getTaskDetails(taskId: number) {
+        return await lastValueFrom(this._http.get<TaskDto>(this._baseUrl + '/assets/dummy-task-details.json'));
     }
 }
