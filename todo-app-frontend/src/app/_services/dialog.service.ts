@@ -1,19 +1,24 @@
 import { Injectable } from "@angular/core";
-import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material/dialog";
-import { TasksDetailsComponent } from "../tasks/tasks-dashboard/tasks-details/tasks-details.component";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Injectable({
     providedIn: "root"
 })
 
 export class DialogService {
+    private defailt_duration = 3000;
 
-    constructor(private _dialog: MatDialog) { }
+    constructor(private _snackBar: MatSnackBar) { }
 
-    // taskDialog():MatDialogRef<TasksDetailsComponent> {
-    //     const taskDetailsConfig = new MatDialogConfig();
-    //     taskDetailsConfig.height = '90%';
-    //     taskDetailsConfig.width = '80%';
-    //     return this._dialog.open(TasksDetailsComponent, {...taskDetailsConfig})
-    // }
+    message(message: string) {
+        this._snackBar.open(message, 'dismiss', {
+            duration: this.defailt_duration
+        })
+    }
+
+    error (message: string) {
+        this._snackBar.open(message, 'dismiss', {
+            duration: this.defailt_duration
+        })
+    }
 }
