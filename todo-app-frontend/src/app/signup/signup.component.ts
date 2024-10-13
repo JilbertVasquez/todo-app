@@ -27,7 +27,7 @@ export class SignupComponent implements OnInit {
         this.form = this._fb.group({
             firstname: ['', [Validators.required]],
             lastname: ['', [Validators.required]],
-            username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(12)]],
+            username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(18)]],
             email: ['', [Validators.required, Validators.email]],
             password: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(36)]],
             retypePassword: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(36)]],
@@ -78,12 +78,12 @@ export class SignupComponent implements OnInit {
             return false;
         }
 
-        if (username === null || username.length < 3 || username > 12) {
+        if (username === null || username.length < 3 || username > 18) {
             this._dialog.error('Username is invalid');
             return false;
         }
 
-        if (password === null || password.length < 3 || password > 12 || retypePassword === null || retypePassword.length < 3 || retypePassword > 12) {
+        if (password === null || password.length < 3 || password > 36 || retypePassword === null || retypePassword.length < 3 || retypePassword > 36) {
             this._dialog.error('Password is invalid');
             return false;
         }
