@@ -41,6 +41,7 @@ namespace todo_app_client.Api.Models
             Username = dto.Username;
             Password = BCrypt.Net.BCrypt.HashPassword(dto.Password, 11);
             Email = dto.Email;
+            CreateDate = DateTime.Today;
         }
     }
 }

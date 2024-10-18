@@ -12,6 +12,7 @@ var appSettings = builder.SetupAppSettings();
 var corsPolicyName = builder.SetupCors();
 
 builder.SetupDataContext(appSettings);
+builder.AddAppServices();
 
 var app = builder.Build();
 
