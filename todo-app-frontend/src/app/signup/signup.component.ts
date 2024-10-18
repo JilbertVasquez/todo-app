@@ -29,8 +29,8 @@ export class SignupComponent implements OnInit {
             lastname: ['', [Validators.required]],
             username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(18)]],
             email: ['', [Validators.required, Validators.email]],
-            password: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(36)]],
-            retypePassword: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(36)]],
+            password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(36)]],
+            retypePassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(36)]],
         });
     }
 
@@ -83,7 +83,7 @@ export class SignupComponent implements OnInit {
             return false;
         }
 
-        if (password === null || password.length < 3 || password > 36 || retypePassword === null || retypePassword.length < 3 || retypePassword > 36) {
+        if (password === null || password.length < 8 || password > 36 || retypePassword === null || retypePassword.length < 8 || retypePassword > 36) {
             this._dialog.error('Password is invalid');
             return false;
         }

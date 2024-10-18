@@ -11,6 +11,8 @@ builder.Services.AddEndpointsApiExplorer();
 var appSettings = builder.SetupAppSettings();
 var corsPolicyName = builder.SetupCors();
 
+builder.SetupDataContext(appSettings);
+
 var app = builder.Build();
 
 app.UseCors(corsPolicyName);
