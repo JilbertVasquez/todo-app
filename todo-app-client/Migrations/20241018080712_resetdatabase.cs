@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace todo_app_client.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class resetdatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -31,7 +31,8 @@ namespace todo_app_client.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Email = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreateDate = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    CreateDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    DeleteDate = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {

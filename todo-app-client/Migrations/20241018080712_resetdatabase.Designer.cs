@@ -12,8 +12,8 @@ using todo_app_client.Api.Data;
 namespace todo_app_client.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20241018072449_InitialCreate-edit")]
-    partial class InitialCreateedit
+    [Migration("20241018080712_resetdatabase")]
+    partial class resetdatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
