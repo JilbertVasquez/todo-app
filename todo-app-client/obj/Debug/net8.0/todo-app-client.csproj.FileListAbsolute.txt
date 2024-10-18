@@ -223,3 +223,4 @@ D:\JILBERT\JIL\Full Stack Projects\todo-app\todo-app-client\obj\Debug\net8.0\ref
 D:\JILBERT\JIL\Full Stack Projects\todo-app\todo-app-client\obj\Debug\net8.0\todo-app-client.pdb
 D:\JILBERT\JIL\Full Stack Projects\todo-app\todo-app-client\obj\Debug\net8.0\todo-app-client.genruntimeconfig.cache
 D:\JILBERT\JIL\Full Stack Projects\todo-app\todo-app-client\obj\Debug\net8.0\ref\todo-app-client.dll
+D:\JILBERT\JIL\Full Stack Projects\todo-app\todo-app-client\bin\Debug\net8.0\BCrypt.Net-Next.dll
