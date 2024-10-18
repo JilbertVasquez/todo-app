@@ -53,6 +53,7 @@ export class TasksDetailsComponent {
 
         if (this.mode === 'edit') {
             const taskId = this._route.snapshot.paramMap.get('id');
+            this.toCreate = false;
 
             if (!taskId) {
                 this._router.navigate(['tasks']);
