@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace todo_app_client.Api.Models
 {
-    [Table("Priorities")]
+    [Table("Priority")]
     public class Priority
     {
         [Key]
