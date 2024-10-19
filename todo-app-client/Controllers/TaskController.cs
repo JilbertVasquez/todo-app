@@ -72,7 +72,7 @@ namespace todo_app_client.Api.Controllers
         {
             // Find the task by TaskId
             var task = await _db.Todos.FindAsync(taskId);
-            
+
             if (task == null || task.IsDeleted)
             {
                 return NotFound();
@@ -88,6 +88,24 @@ namespace todo_app_client.Api.Controllers
             await _db.SaveChangesAsync();
 
             return NoContent(); // Indicates that the update was successful but no content to return
+        }
+
+        [HttpPut("delete/{taskId}")]
+        public async Task<IActionResult> DeleteTask(int taskId)
+        {
+            var task = await _db.Todos.FindAsync(taskId);
+            
+            if (task == null || task.IsDeleted)
+            {
+                return NotFound();
+            }
+
+            task.IsDeleted = true;
+            task.DeletedAt = DateTime.UtcNow;
+
+            await _db.SaveChangesAsync();
+
+            return NoContent();
         }
     }
 }
