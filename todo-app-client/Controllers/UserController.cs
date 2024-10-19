@@ -26,7 +26,6 @@ namespace todo_app_client.Api.Controllers
         }
 
         [HttpPost("Register")]
-
         public async Task<IActionResult> RegisterUser(RegisterUserDto dto)
         {
             if (string.IsNullOrEmpty(dto.Firstname)) return BadRequest("Invalid firstname.");
@@ -46,6 +45,25 @@ namespace todo_app_client.Api.Controllers
 
             await _db.SaveChangesAsync();
             return Ok();
+        }
+
+        [HttpGet("Login")]
+        public IActionResult Login(LoginUserDto dto)
+        {
+            var user = _db.Users.Where(x => x.Username == dto.Username && x.DeleteDate == null).FirstOrDefault();
+
+            if (user == null) return BadRequest("Invalid username.");
+
+            if (!BCrypt.Net.BCrypt.Verify(dto.Password, user.Password))
+                return BadRequest("Invalid password.");
+
+            var userDetails = new UserDetailsDto
+            {
+                Id = user.Id,
+                Username = user.Username 
+            };
+
+            return Ok(userDetails);
         }
     }
 }
