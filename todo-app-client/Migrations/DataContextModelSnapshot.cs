@@ -36,7 +36,7 @@ namespace todo_app_client.Migrations
 
                     b.HasKey("PriorityId");
 
-                    b.ToTable("Priorities");
+                    b.ToTable("Priority");
                 });
 
             modelBuilder.Entity("todo_app_client.Api.Models.Status", b =>
@@ -74,18 +74,13 @@ namespace todo_app_client.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Note")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("PriorityId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PriorityId1")
-                        .HasColumnType("int");
-
                     b.Property<int>("StatusId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("StatusId1")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -99,11 +94,7 @@ namespace todo_app_client.Migrations
 
                     b.HasIndex("PriorityId");
 
-                    b.HasIndex("PriorityId1");
-
                     b.HasIndex("StatusId");
-
-                    b.HasIndex("StatusId1");
 
                     b.HasIndex("UserId");
 
@@ -152,24 +143,16 @@ namespace todo_app_client.Migrations
             modelBuilder.Entity("todo_app_client.Api.Models.Todo", b =>
                 {
                     b.HasOne("todo_app_client.Api.Models.Priority", "Priority")
-                        .WithMany()
+                        .WithMany("Todos")
                         .HasForeignKey("PriorityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("todo_app_client.Api.Models.Priority", null)
-                        .WithMany("Todos")
-                        .HasForeignKey("PriorityId1");
-
                     b.HasOne("todo_app_client.Api.Models.Status", "Status")
-                        .WithMany()
+                        .WithMany("Todos")
                         .HasForeignKey("StatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("todo_app_client.Api.Models.Status", null)
-                        .WithMany("Todos")
-                        .HasForeignKey("StatusId1");
 
                     b.HasOne("todo_app_client.Api.Models.User", "User")
                         .WithMany()
