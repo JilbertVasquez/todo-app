@@ -59,7 +59,7 @@ namespace todo_app_client.Api.Controllers
 
             var userDetails = new UserDetailsDto
             {
-                Id = user.Id,
+                UserId = user.UserId,
                 Username = user.Username 
             };
 

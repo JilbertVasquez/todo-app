@@ -8,7 +8,8 @@ namespace todo_app_client.Api.Models
     [Table("users")]
     public class User
     {
-        public int Id { get; set; }
+        [Key]
+        public int UserId { get; set; }
 
         [Required]
         public string Firstname { get; set; } = default!;
