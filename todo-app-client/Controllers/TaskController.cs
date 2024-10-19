@@ -66,5 +66,28 @@ namespace todo_app_client.Api.Controllers
 
         return Ok(tasks);
         }
+
+        [HttpPut("edit/{taskId}")]
+        public async Task<IActionResult> EditTask(int taskId, [FromBody] UpdateTaskDto taskDto)
+        {
+            // Find the task by TaskId
+            var task = await _db.Todos.FindAsync(taskId);
+            
+            if (task == null || task.IsDeleted)
+            {
+                return NotFound();
+            }
+
+            // Update task properties
+            task.Title = taskDto.Title;
+            task.Note = taskDto.Note;
+            task.PriorityId = taskDto.PriorityId;
+            task.StatusId = taskDto.StatusId;
+
+            // Save changes to the database
+            await _db.SaveChangesAsync();
+
+            return NoContent(); // Indicates that the update was successful but no content to return
+        }
     }
 }
