@@ -225,3 +225,6 @@ D:\JILBERT\JIL\Full Stack Projects\todo-app\todo-app-client\obj\Debug\net8.0\tod
 D:\JILBERT\JIL\Full Stack Projects\todo-app\todo-app-client\obj\Debug\net8.0\ref\todo-app-client.dll
 D:\JILBERT\JIL\Full Stack Projects\todo-app\todo-app-client\bin\Debug\net8.0\BCrypt.Net-Next.dll
 D:\JILBERT\JIL\Full Stack Projects\todo-app\todo-app-client\bin\Debug\net8.0\AutoMapper.dll
+D:\zProjects\todo-app\todo-app-client\bin\Debug\net8.0\AutoMapper.dll
+D:\zProjects\todo-app\todo-app-client\bin\Debug\net8.0\BCrypt.Net-Next.dll
+D:\zProjects\todo-app\todo-app-client\obj\Debug\net8.0\todo-app-client.sourcelink.json
