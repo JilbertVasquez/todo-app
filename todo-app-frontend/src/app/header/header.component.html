@@ -3,7 +3,7 @@
         <a [routerLink]="['/']" mat-button>Home</a>
     </div>
     <div>
-        <div *ngIf="isLoggedIn">
+        <div *ngIf="authSerivce.isLoggedIn">
             <button mat-button [matMenuTriggerFor]="me">
                 <mat-icon>arrow_drop_down</mat-icon>
                 Hi, Jilbert
@@ -16,7 +16,7 @@
                 </button>
             </mat-menu>
         </div>
-        <div *ngIf="!isLoggedIn" class="flex gap-4">
+        <div *ngIf="!authSerivce.isLoggedIn" class="flex gap-4">
             <button (click)="login()">Login</button>
             <button (click)="signup()">SignUp</button>
         </div>

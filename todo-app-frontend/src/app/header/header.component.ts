@@ -5,6 +5,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {Router, RouterModule} from '@angular/router';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
     selector: 'app-header',
@@ -21,9 +22,8 @@ import {Router, RouterModule} from '@angular/router';
     styleUrl: './header.component.css',
 })
 export class HeaderComponent {
-    isLoggedIn = true;
 
-    constructor(private _router: Router) {}
+    constructor(private _router: Router, public authSerivce: AuthService) {}
 
     login() {
         this._router.navigate(['/login']);
@@ -34,7 +34,7 @@ export class HeaderComponent {
     }
 
     logout() {
-        this.isLoggedIn = !this.isLoggedIn;
+        this.authSerivce.isLoggedIn = false;
         this._router.navigate(['/']);
     }
 }

@@ -52,6 +52,7 @@ export class LoginComponent {
         // .catch((error) => {
         //     this._dialog.error(error);
         // })
+        this._router.navigate(['/']);
         this.isBusy = false;
     }
 

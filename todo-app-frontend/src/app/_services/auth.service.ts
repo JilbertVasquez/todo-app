@@ -10,6 +10,7 @@ import { LoginDto } from "../_dtos/login-dto";
 })
 export class AuthService {
     private _baseUrl = environment.apiUrl + 'auth/';
+    isLoggedIn = false;
 
     constructor(private _http: HttpClient) { }
 
@@ -20,7 +21,6 @@ export class AuthService {
     async login(dto: LoginDto) {
         // const user = await lastValueFrom(this._http.post(this._baseUrl + 'login/', dto));
         const user = await lastValueFrom(this._http.post('assets/dummy-login.json', dto));
-
-        console.log(user);
+        this.isLoggedIn = true;
     }
 }
