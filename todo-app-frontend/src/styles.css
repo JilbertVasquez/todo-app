@@ -14,8 +14,3 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     max-width: none !important;
     max-height: none !important;
 }
-/* 
-.mat-mdc-form-field-textarea-control {
-    height: 500px !important;
-    background-color: red !important;
-} */

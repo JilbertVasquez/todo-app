@@ -1,0 +1,11 @@
+.mat-mdc-form-field-textarea-control {
+    height: 330px !important;
+    /* background-color: red !important; */
+}
+
+@media screen and (min-width: 1600px) {
+    .mat-mdc-form-field-textarea-control { 
+        /* background-color: blue !important; */
+        height: 500px !important;
+    }
+}
