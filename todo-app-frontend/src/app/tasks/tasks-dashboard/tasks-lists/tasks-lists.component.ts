@@ -68,7 +68,6 @@ export class TasksListsComponent implements OnInit {
 
     ngOnInit() {
         this.filteredTaskList = this.taskList();
-        console.log(this.taskList());
     }
 
     editTask(taskId: number) {

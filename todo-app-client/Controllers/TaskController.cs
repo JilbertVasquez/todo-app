@@ -71,6 +71,35 @@ namespace todo_app_client.Api.Controllers
         return Ok(tasks);
         }
 
+        [HttpGet("task-details")]
+        public async Task<IActionResult> TaskDetails([FromQuery] int taskId)
+        {
+            var task = await _db.Todos
+                .Where(t => t.TodoId == taskId && !t.IsDeleted)
+                .Include(t => t.Priority)
+                .Include(t => t.Status)
+                .Select(t => new TaskDetailsDto
+                {
+                    TaskId = t.TodoId,
+                    Title = t.Title,
+                    Note = t.Note,
+                    PriorityId = t.PriorityId,
+                    StatusId = t.StatusId,
+                    PriorityName = t.Priority.PriorityName,
+                    StatusName = t.Status.StatusName
+                })
+                .FirstOrDefaultAsync();
+
+            if (task == null)
+            {
+                return NotFound();
+            }
+
+
+
+            return Ok(task);
+        }
+
         [HttpPut("edit/{taskId}")]
         public async Task<IActionResult> EditTask(int taskId, [FromBody] UpdateTaskDto taskDto)
         {

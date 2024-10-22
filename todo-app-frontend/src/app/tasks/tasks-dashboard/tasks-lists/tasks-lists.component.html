@@ -43,7 +43,8 @@
                         <div class="flex items-center justify-center] w-full">
                             <mat-card-title class="flex-1 text-white">{{task.title}}</mat-card-title>
                             <div class="text-white flex gap-2">
-                                <button (click)="editTask(task.id)">
+                                <button (click)="editTask(task.taskId)">
+                                    {{task.taskId}}
                                     <mat-icon>edit</mat-icon>
                                 </button>
                                 <button>

@@ -1,5 +1,5 @@
 export interface TaskListDto {
-    id: number,
+    taskId: number,
     title: string,
     statusId: number,
     statusName: string,

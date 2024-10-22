@@ -25,7 +25,7 @@ export class TasksService {
         this.taskList.set(taskList);
     }
 
-    async getTaskDetails(taskId: number) {
-        return await lastValueFrom(this._http.get<TaskDto>(this._baseUrl + '/assets/dummy-task-details.json'));
+    getTaskDetails(taskId: number) {
+        return lastValueFrom(this._http.get<TaskDto>(`${this._baseUrl}task-details?taskId=${taskId}`));
     }
 }
