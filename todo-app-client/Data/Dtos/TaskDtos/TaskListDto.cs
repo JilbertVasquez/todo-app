@@ -12,5 +12,8 @@ namespace todo_app_client.Api.Data.Dtos.TaskDtos
 
         public int StatusId { get; set; } = default!;
 
+        public string PriorityName { get; set; } = default!;
+
+        public string StatusName { get; set; } = default!;
     }
 }

@@ -47,7 +47,7 @@ export class TasksListsComponent implements OnInit {
     status = [
         {name: 'All'},
         {name: 'Todo'},
-        {name: 'In Progress'},
+        {name: 'InProgress'},
         {name: 'Complete'},
     ];
 
@@ -68,6 +68,7 @@ export class TasksListsComponent implements OnInit {
 
     ngOnInit() {
         this.filteredTaskList = this.taskList();
+        console.log(this.taskList());
     }
 
     editTask(taskId: number) {
@@ -99,11 +100,11 @@ export class TasksListsComponent implements OnInit {
                 .includes(this.inputValue.toLowerCase());
             const filteredPriority =
                 this.selectedPriority.toLowerCase() === 'all' ||
-                task.priorityType.toLowerCase() ===
+                task.priorityName.toLowerCase() ===
                     this.selectedPriority.toLowerCase();
             const filteredStatus =
                 this.selectedStatus.toLowerCase() === 'all' ||
-                task.status.toLowerCase() === this.selectedStatus.toLowerCase();
+                task.statusName.toLowerCase() === this.selectedStatus.toLowerCase();
 
             return filteredTitle && filteredPriority && filteredStatus;
         });

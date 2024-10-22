@@ -10,18 +10,18 @@ import { TaskDto } from "../_dtos/task-dto";
 })
 
 export class TasksService {
-    private _baseUrl = environment.apiUrl;
+    private _baseUrl = environment.apiUrl + '/api/task/';
 
     taskList = signal<TaskListDto[]>([]);
 
     constructor(private _http: HttpClient) {}
 
-    async getTasks() {
-        return await lastValueFrom(this._http.get<TaskListDto[]>(this._baseUrl + '/assets/dummy-task-list.json'));
+    async getTasks(userId: number) {
+        return await lastValueFrom(this._http.get<TaskListDto[]>(`${this._baseUrl}list?userId=${userId}`));
     }
 
-    async loadTasks() {
-        const taskList = await this.getTasks();
+    async loadTasks(userId: number) {
+        const taskList = await this.getTasks(userId);
         this.taskList.set(taskList);
     }
 

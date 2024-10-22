@@ -54,13 +54,17 @@ namespace todo_app_client.Api.Controllers
 
             var tasks = await _db.Todos
             .Where(t => !t.IsDeleted)
+            .Include(t => t.Priority)
+            .Include(t => t.Status)
             .Select(t => new TaskListDto
             {
                 TaskId = t.TodoId,
                 Title = t.Title,
                 Note = t.Note!,
                 PriorityId = t.PriorityId,
-                StatusId = t.StatusId
+                PriorityName = t.Priority.PriorityName,
+                StatusId = t.StatusId,
+                StatusName = t.Status.StatusName,
             })
             .ToListAsync();
 
