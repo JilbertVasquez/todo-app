@@ -6,7 +6,7 @@
         <div *ngIf="authSerivce.isLoggedIn">
             <button mat-button [matMenuTriggerFor]="me">
                 <mat-icon>arrow_drop_down</mat-icon>
-                Hi, Jilbert
+                {{authSerivce.loggedInUser()?.username}}
             </button>
 
             <mat-menu #me="matMenu">

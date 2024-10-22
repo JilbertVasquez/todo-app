@@ -47,8 +47,8 @@ namespace todo_app_client.Api.Controllers
             return Ok();
         }
 
-        [HttpGet("Login")]
-        public IActionResult Login(LoginUserDto dto)
+        [HttpPost("Login")]
+        public IActionResult Login([FromBody] LoginUserDto dto)
         {
             var user = _db.Users.Where(x => x.Username == dto.Username && x.DeleteDate == null).FirstOrDefault();
 
