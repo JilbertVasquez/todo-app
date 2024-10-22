@@ -14,6 +14,9 @@ namespace todo_app_client.Api.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<Todo> Todos { get; set; }
+        public DbSet<Status> Status { get; set; }
+        public DbSet<Priority> Priority { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

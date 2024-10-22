@@ -1,8 +1,9 @@
-import { PrioritiesType, StatusType } from "../tasks/tasks-dashboard/tasks-details/tasks-details.component";
+import { PriorityDto } from "./priority-dto";
+import { StatusDto } from "./status-dto";
 
 export interface CreateTaskDto {
     title: string,
     note: string,
-    status: StatusType,
-    priorityType: PrioritiesType
+    status: StatusDto,
+    priority: PriorityDto
 }

@@ -12,15 +12,15 @@
                     <div class="flex gap-3">
                         <mat-form-field appearance="outline">
                             <mat-label>Select Priority</mat-label>
-                            <mat-select [(ngModel)]="taskDetails.priorityType" name="priority">
-                                <mat-option *ngFor="let prio of priorities" [value]="prio">{{prio}}</mat-option>
+                            <mat-select [(ngModel)]="taskDetails.priority" name="priority">
+                                <mat-option *ngFor="let prio of priorities()" [value]="prio">{{prio.priorityName}}</mat-option>
                             </mat-select>
                         </mat-form-field>
 
                         <mat-form-field appearance="outline">
                             <mat-label>Select Status</mat-label>
                             <mat-select [(ngModel)]="taskDetails.status" name="status">
-                                <mat-option *ngFor="let stat of status" [value]="stat">{{stat}}</mat-option>
+                                <mat-option *ngFor="let stat of status()" [value]="stat">{{stat.statusName}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
