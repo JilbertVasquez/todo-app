@@ -17,7 +17,7 @@ export class TasksService {
     constructor(private _http: HttpClient) {}
 
     async getTasks(userId: number) {
-        return await lastValueFrom(this._http.get<TaskListDto[]>(`${this._baseUrl}list?userId=${userId}`));
+        return await lastValueFrom(this._http.post<TaskListDto[]>(`${this._baseUrl}list`, { userId }));
     }
 
     async loadTasks(userId: number) {

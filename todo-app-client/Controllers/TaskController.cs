@@ -44,16 +44,16 @@ namespace todo_app_client.Api.Controllers
             return Ok();
         }
 
-        [HttpGet("list")]
-        public async Task<ActionResult<IEnumerable<Todo>>>  GetTaskList([FromQuery] int userId)
+        [HttpPost("list")]
+        public async Task<ActionResult<IEnumerable<Todo>>>  GetTaskList([FromBody] UserIdDto userId)
         {
-            if (userId <= 0)
+            if (userId.UserId <= 0)
             {
                 return BadRequest("Invalid userId");
             }
 
             var tasks = await _db.Todos
-            .Where(t => !t.IsDeleted)
+            .Where(t => t.UserId == userId.UserId && !t.IsDeleted)
             .Include(t => t.Priority)
             .Include(t => t.Status)
             .Select(t => new TaskListDto
