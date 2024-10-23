@@ -2,7 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using todo_app_client.Api.Data;
-using todo_app_client.Api.Data.Dtos.StatusDto;
+using todo_app_client.Api.Data.Dtos.StatusDtos;
 
 namespace todo_app_client.Api.Controllers
 {

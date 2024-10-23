@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {Component, Signal} from '@angular/core';
+import { Component, OnInit, Signal, computed } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -30,20 +30,23 @@ import { PriorityService } from '../../../_services/priority.service';
         ReactiveFormsModule,
         FormsModule],
     templateUrl: './tasks-details.component.html',
-    styleUrl: './tasks-details.component.css',
+    styleUrls: ['./tasks-details.component.css'],
 })
-export class TasksDetailsComponent {
+export class TasksDetailsComponent implements OnInit {
     toCreate: boolean = true;
 
     priorities: Signal<PriorityDto[]>;
     status: Signal<StatusDto[]>;
 
+    selectedPriority: string = '';
+    selectedStatus: string = '';
+
     mode: string | null = null;
     taskId: number | null = null;
     taskDetails: TaskDto;
 
-    constructor(private _route: ActivatedRoute, 
-                private _router: Router, 
+    constructor(private _route: ActivatedRoute,
+                private _router: Router,
                 private _taskService: TasksService,
                 private _statusService: StatusService,
                 private _priorityService: PriorityService
@@ -52,9 +55,9 @@ export class TasksDetailsComponent {
             id: 0,
             title: '',
             note: '',
-            status: {statusId: 1, statusName: 'Todo'},
-            priority: {priorityId: 1, priorityName: 'Normal'}
-        }
+            status: { statusId: 1, statusName: 'Todo' },
+            priority: { priorityId: 1, priorityName: 'Normal' }
+        };
 
         this.priorities = this._priorityService.priority.asReadonly();
         this.status = this._statusService.status.asReadonly();
@@ -74,14 +77,21 @@ export class TasksDetailsComponent {
             else {
                 this.taskId = +taskId;
                 await this._getTaskDetails(this.taskId);
+                this.selectedPriority = this.taskDetails.priority.priorityName;
+                this.selectedStatus = this.taskDetails.status.statusName;
             }
         }
     }
 
+    save() {
+        console.log("Save");
+    }
+
+    update() {
+        console.log("Update");
+    }
 
     private async _getTaskDetails(taskId: number) {
         this.taskDetails = await this._taskService.getTaskDetails(taskId);
     }
-
-
 }

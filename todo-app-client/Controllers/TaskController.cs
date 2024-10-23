@@ -3,6 +3,8 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using todo_app_client.Api.Data;
+using todo_app_client.Api.Data.Dtos.PriorityDtos;
+using todo_app_client.Api.Data.Dtos.StatusDtos;
 using todo_app_client.Api.Data.Dtos.TaskDtos;
 using todo_app_client.Api.Models;
 
@@ -83,10 +85,16 @@ namespace todo_app_client.Api.Controllers
                     TaskId = t.TodoId,
                     Title = t.Title,
                     Note = t.Note,
-                    PriorityId = t.PriorityId,
-                    StatusId = t.StatusId,
-                    PriorityName = t.Priority.PriorityName,
-                    StatusName = t.Status.StatusName
+                    Priority = new PriorityDto
+                    {
+                        PriorityId = t.PriorityId,
+                        PriorityName = t.Priority.PriorityName
+                    },
+                    Status = new StatusDto
+                    {
+                        StatusId = t.StatusId,
+                        StatusName = t.Status.StatusName
+                    }
                 })
                 .FirstOrDefaultAsync();
 

@@ -1,4 +1,4 @@
-namespace todo_app_client.Api.Data.Dtos.PriorityDto
+namespace todo_app_client.Api.Data.Dtos.PriorityDtos
 {
     public class PriorityDto
     {

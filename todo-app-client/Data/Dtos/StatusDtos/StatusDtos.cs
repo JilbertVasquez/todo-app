@@ -1,4 +1,4 @@
-namespace todo_app_client.Api.Data.Dtos.StatusDto
+namespace todo_app_client.Api.Data.Dtos.StatusDtos
 {
     public class StatusDto
     {
