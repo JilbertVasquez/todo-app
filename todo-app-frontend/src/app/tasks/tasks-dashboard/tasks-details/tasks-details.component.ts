@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, Signal, computed } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatOptionModule } from '@angular/material/core';
@@ -15,6 +15,7 @@ import { PriorityDto } from '../../../_dtos/priority-dto';
 import { StatusDto } from '../../../_dtos/status-dto';
 import { StatusService } from '../../../_services/status.service';
 import { PriorityService } from '../../../_services/priority.service';
+import { CreateTaskDto } from '../../../_dtos/create-task-dto';
 
 @Component({
     selector: 'app-tasks-details',
@@ -34,12 +35,10 @@ import { PriorityService } from '../../../_services/priority.service';
 })
 export class TasksDetailsComponent implements OnInit {
     toCreate: boolean = true;
+    taskForm: FormGroup;
 
     priorities: Signal<PriorityDto[]>;
     status: Signal<StatusDto[]>;
-
-    selectedPriority: string = '';
-    selectedStatus: string = '';
 
     mode: string | null = null;
     taskId: number | null = null;
@@ -49,7 +48,8 @@ export class TasksDetailsComponent implements OnInit {
                 private _router: Router,
                 private _taskService: TasksService,
                 private _statusService: StatusService,
-                private _priorityService: PriorityService
+                private _priorityService: PriorityService,
+                private _fb: FormBuilder
     ) {
         this.taskDetails = {
             id: 0,
@@ -61,6 +61,13 @@ export class TasksDetailsComponent implements OnInit {
 
         this.priorities = this._priorityService.priority.asReadonly();
         this.status = this._statusService.status.asReadonly();
+
+        this.taskForm = this._fb.group({
+            title: ['', [Validators.required, Validators.minLength(3)]],
+            note: ['', Validators.required],
+            priority: [null, Validators.required],
+            status: [null, Validators.required],
+        });
 
     }
 
@@ -77,17 +84,65 @@ export class TasksDetailsComponent implements OnInit {
             else {
                 this.taskId = +taskId;
                 await this._getTaskDetails(this.taskId);
-                this.selectedPriority = this.taskDetails.priority.priorityName;
-                this.selectedStatus = this.taskDetails.status.statusName;
+
+                this.taskForm.patchValue({
+                title: this.taskDetails.title,
+                note: this.taskDetails.note,
+                priority: this.taskDetails.priority.priorityName,
+                status: this.taskDetails.status.statusName
+            });
             }
         }
     }
 
     save() {
+        const selectedPriority = this.priorities().find(prio => prio.priorityName === this.taskForm.value.priority);
+        const selectedStatus = this.status().find(stat => stat.statusName === this.taskForm.value.status);
+
+        if (this.taskForm.valid && selectedPriority && selectedStatus) {
+            const createTask: CreateTaskDto = {
+                title: this.taskForm.value.title,
+                note: this.taskForm.value.note,
+
+                priority: {
+                    priorityId: selectedPriority.priorityId, 
+                    priorityName: selectedPriority.priorityName
+                },
+                status: { 
+                    statusId: selectedStatus.statusId,
+                    statusName: selectedStatus.statusName
+                }
+            };
+            console.log(createTask);
+        } else {
+            console.log("Form is invalid!");
+        }
         console.log("Save");
     }
 
     update() {
+        const selectedPriority = this.priorities().find(prio => prio.priorityName === this.taskForm.value.priority);
+        const selectedStatus = this.status().find(stat => stat.statusName === this.taskForm.value.status);
+
+        if (this.taskForm.valid && selectedPriority && selectedStatus) {
+            const updateTask: TaskDto = {
+                id: this.taskId!,
+                title: this.taskForm.value.title,
+                note: this.taskForm.value.note,
+
+                priority: {
+                    priorityId: selectedPriority.priorityId, 
+                    priorityName: selectedPriority.priorityName
+                },
+                status: { 
+                    statusId: selectedStatus.statusId,
+                    statusName: selectedStatus.statusName
+                }
+            };
+            console.log(updateTask);
+        } else {
+            console.log("Form is invalid!");
+        }
         console.log("Update");
     }
 
