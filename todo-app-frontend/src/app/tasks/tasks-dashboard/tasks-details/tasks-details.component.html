@@ -1,6 +1,17 @@
 <div class="p-5 h-full !text-white flex justify-center items-center">
     <mat-card class="w-[70%] h-[90%]">
-        <mat-card-title class="p-5">{{toCreate ? 'Create Task' : 'Edit Task'}}</mat-card-title>
+        <mat-card-title class="p-5">
+            <div class="flex justify-between">
+                <div>
+                    {{toCreate ? 'Create Task' : 'Edit Task'}}
+                </div>
+                <div *ngIf="!toCreate" class="px-2">
+                    <button (click)="deleteTask()">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </mat-card-title>
         <mat-card-content class="h-full">
             <form [formGroup]="taskForm" class="h-full p-2">
                 <mat-form-field appearance="outline" class="w-full">

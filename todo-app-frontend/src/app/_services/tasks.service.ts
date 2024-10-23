@@ -28,4 +28,8 @@ export class TasksService {
     getTaskDetails(taskId: number) {
         return lastValueFrom(this._http.get<TaskDto>(`${this._baseUrl}task-details?taskId=${taskId}`));
     }
+
+    deleteTask(taskId: number) {
+        return lastValueFrom(this._http.delete<boolean>(`${this._baseUrl}delete/${taskId}`));
+    }
 }

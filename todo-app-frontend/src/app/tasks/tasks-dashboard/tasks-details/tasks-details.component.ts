@@ -16,6 +16,7 @@ import { StatusDto } from '../../../_dtos/status-dto';
 import { StatusService } from '../../../_services/status.service';
 import { PriorityService } from '../../../_services/priority.service';
 import { CreateTaskDto } from '../../../_dtos/create-task-dto';
+import { AuthService } from '../../../_services/auth.service';
 
 @Component({
     selector: 'app-tasks-details',
@@ -49,6 +50,7 @@ export class TasksDetailsComponent implements OnInit {
                 private _taskService: TasksService,
                 private _statusService: StatusService,
                 private _priorityService: PriorityService,
+                private _authService: AuthService,
                 private _fb: FormBuilder
     ) {
         this.taskDetails = {
@@ -144,6 +146,21 @@ export class TasksDetailsComponent implements OnInit {
             console.log("Form is invalid!");
         }
         console.log("Update");
+    }
+
+    async deleteTask() {
+        const taskId = this.taskId;
+
+        if (!taskId) {
+            return;
+        }
+
+        const isSuccessful = await this._taskService.deleteTask(taskId);
+
+        if (isSuccessful) {
+            await this._taskService.loadTasks(this._authService.loggedInUser()!.userId);
+            this._router.navigate(['./tasks/tasks-dashboard']);
+        }
     }
 
     private async _getTaskDetails(taskId: number) {

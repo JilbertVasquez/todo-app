@@ -131,7 +131,7 @@ namespace todo_app_client.Api.Controllers
             return NoContent(); // Indicates that the update was successful but no content to return
         }
 
-        [HttpPut("delete/{taskId}")]
+        [HttpDelete("delete/{taskId}")]
         public async Task<IActionResult> DeleteTask(int taskId)
         {
             var task = await _db.Todos.FindAsync(taskId);
@@ -146,7 +146,7 @@ namespace todo_app_client.Api.Controllers
 
             await _db.SaveChangesAsync();
 
-            return NoContent();
+            return Ok(true);
         }
     }
 }
