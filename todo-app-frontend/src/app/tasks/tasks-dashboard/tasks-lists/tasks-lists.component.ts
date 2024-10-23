@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {Component, OnInit, Signal} from '@angular/core';
+import {Component, computed, OnInit, Signal} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
@@ -13,6 +13,8 @@ import {TasksService} from '../../../_services/tasks.service';
 import {TaskListDto} from '../../../_dtos/task-list-dto';
 import {DialogService} from '../../../_services/dialog.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { StatusService } from '../../../_services/status.service';
+import { PriorityService } from '../../../_services/priority.service';
 
 @Component({
     selector: 'app-tasks-lists',
@@ -35,21 +37,21 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
     styleUrl: './tasks-lists.component.css',
 })
 export class TasksListsComponent implements OnInit {
-    priorities = [
-        {name: 'All'},
-        {name: 'Critical'},
-        {name: 'High'},
-        {name: 'Major'},
-        {name: 'Normal'},
-        {name: 'Minor'},
-    ];
+    priorities = computed(() => {
+        const priority = this._priorityService.priority().slice();
 
-    status = [
-        {name: 'All'},
-        {name: 'Todo'},
-        {name: 'InProgress'},
-        {name: 'Complete'},
-    ];
+        if (!priority.length) return [];
+
+        return [...priority, { priorityName: 'All', priorityId: priority.length + 1}]
+    })
+
+    status = computed(() => {
+        const status = this._statusService.status().slice();
+
+        if (!status.length) return [];
+
+        return [...status, { statusName: 'All', statusId: status.length + 1 }];
+    })
 
     selectedPriority: string = 'All';
     selectedStatus: string = 'All';
@@ -61,14 +63,14 @@ export class TasksListsComponent implements OnInit {
         private _tasksService: TasksService,
         private _dialog: DialogService,
         private _router: Router,
-        private _route: ActivatedRoute
+        private _route: ActivatedRoute,
+        private _statusService: StatusService,
+        private _priorityService: PriorityService
     ) {
         this.taskList = _tasksService.taskList.asReadonly();
     }
 
-    ngOnInit() {
-        this.filteredTaskList = this.taskList();
-    }
+    ngOnInit() { }
 
     editTask(taskId: number) {
         this._router.navigate(['../edit-tasks/edit', taskId], {relativeTo: this._route});
