@@ -70,7 +70,9 @@ export class TasksListsComponent implements OnInit {
         this.taskList = _tasksService.taskList.asReadonly();
     }
 
-    ngOnInit() { }
+    ngOnInit() { 
+        this.filteredTaskList = this.taskList();
+    }
 
     editTask(taskId: number) {
         this._router.navigate(['../edit-tasks/edit', taskId], {relativeTo: this._route});
