@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { lastValueFrom } from "rxjs";
 import { TaskListDto } from "../_dtos/task-list-dto";
 import { TaskDto } from "../_dtos/task-dto";
+import { CreateTaskDto } from "../_dtos/create-task-dto";
 
 @Injectable({
     providedIn: "root"
@@ -27,6 +28,10 @@ export class TasksService {
 
     getTaskDetails(taskId: number) {
         return lastValueFrom(this._http.get<TaskDto>(`${this._baseUrl}task-details?taskId=${taskId}`));
+    }
+
+    createTask(createTask: CreateTaskDto) {
+        return lastValueFrom(this._http.post(`${this._baseUrl}create`, createTask));
     }
 
     deleteTask(taskId: number) {

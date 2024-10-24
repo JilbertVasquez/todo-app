@@ -35,15 +35,15 @@ namespace todo_app_client.Api.Controllers
                 UserId = taskDto.UserId,
                 Title = taskDto.Title,
                 Note = taskDto.Note,
-                PriorityId = taskDto.PriorityId,
-                StatusId = taskDto.StatusId,
+                PriorityId = taskDto.Priority.PriorityId,
+                StatusId = taskDto.Status.StatusId,
                 CreatedAt = DateTime.UtcNow
             };
 
             _db.Todos.Add(todo);
             await _db.SaveChangesAsync(); 
             
-            return Ok();
+            return Ok(true);
         }
 
         [HttpPost("list")]

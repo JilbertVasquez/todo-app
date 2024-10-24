@@ -56,6 +56,7 @@ export class TasksDetailsComponent implements OnInit {
                 private _dialogService: DialogService
     ) {
         this.taskDetails = {
+            userId: 0,
             id: 0,
             title: '',
             note: '',
@@ -99,12 +100,14 @@ export class TasksDetailsComponent implements OnInit {
         }
     }
 
-    save() {
+    async save() {
         const selectedPriority = this.priorities().find(prio => prio.priorityName === this.taskForm.value.priority);
         const selectedStatus = this.status().find(stat => stat.statusName === this.taskForm.value.status);
+        const userId = this._authService.loggedInUser()?.userId;
 
-        if (this.taskForm.valid && selectedPriority && selectedStatus) {
+        if (this.taskForm.valid && selectedPriority && selectedStatus && userId) {
             const createTask: CreateTaskDto = {
+                userId: userId,
                 title: this.taskForm.value.title,
                 note: this.taskForm.value.note,
 
@@ -117,19 +120,30 @@ export class TasksDetailsComponent implements OnInit {
                     statusName: selectedStatus.statusName
                 }
             };
-            console.log(createTask);
-        } else {
-            console.log("Form is invalid!");
+
+            const isSuccessful = await this._tasksService.createTask(createTask);
+
+            if (isSuccessful) {
+                await this._tasksService.loadTasks(userId);
+                this._dialogService.message('Task added successfully.');
+                this._router.navigate(['./tasks/tasks-dashboard']);
+
+            }
+
+        } 
+        else {
+            this._dialogService.error("Form is invalid.");
         }
-        console.log("Save");
     }
 
     update() {
         const selectedPriority = this.priorities().find(prio => prio.priorityName === this.taskForm.value.priority);
         const selectedStatus = this.status().find(stat => stat.statusName === this.taskForm.value.status);
+        const userId = this._authService.loggedInUser()?.userId;
 
-        if (this.taskForm.valid && selectedPriority && selectedStatus) {
+        if (this.taskForm.valid && selectedPriority && selectedStatus && userId) {
             const updateTask: TaskDto = {
+                userId: userId,
                 id: this.taskId!,
                 title: this.taskForm.value.title,
                 note: this.taskForm.value.note,
@@ -143,11 +157,10 @@ export class TasksDetailsComponent implements OnInit {
                     statusName: selectedStatus.statusName
                 }
             };
-            console.log(updateTask);
-        } else {
-            console.log("Form is invalid!");
+        } 
+        else {
+            this._dialogService.error("Form is invalid.");
         }
-        console.log("Update");
     }
 
     async deleteTask() {
