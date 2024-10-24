@@ -15,6 +15,7 @@ import {DialogService} from '../../../_services/dialog.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { StatusService } from '../../../_services/status.service';
 import { PriorityService } from '../../../_services/priority.service';
+import { AuthService } from '../../../_services/auth.service';
 
 @Component({
     selector: 'app-tasks-lists',
@@ -55,27 +56,40 @@ export class TasksListsComponent implements OnInit {
 
     selectedPriority: string = 'All';
     selectedStatus: string = 'All';
-    taskList: Signal<TaskListDto[]>;
+    taskList: Signal<TaskListDto[]>;    // refactor this soon, make it computed and adjust the filteredTaskList in deletion to make it reactive
     filteredTaskList: TaskListDto[] = [];
     inputValue: string = '';
 
     constructor(
         private _tasksService: TasksService,
-        private _dialog: DialogService,
+        private _dialogService: DialogService,
+        private _authService: AuthService,
         private _router: Router,
         private _route: ActivatedRoute,
         private _statusService: StatusService,
         private _priorityService: PriorityService
     ) {
         this.taskList = _tasksService.taskList.asReadonly();
-    }
-
-    ngOnInit() { 
         this.filteredTaskList = this.taskList();
     }
 
+    ngOnInit() { }
+
     editTask(taskId: number) {
         this._router.navigate(['../edit-tasks/edit', taskId], {relativeTo: this._route});
+    }
+
+    async deleteTask(taskId: number) {
+        const isSuccessful = await this._tasksService.deleteTask(taskId);
+
+        if (isSuccessful) {
+            await this._tasksService.loadTasks(this._authService.loggedInUser()!.userId);
+            this._dialogService.message('Task deleted successfully.');
+            this.filteredTaskList = this.taskList();
+        }
+        else {
+            this._dialogService.message('Task deletion failed.');
+        }
     }
 
     // createTask() {

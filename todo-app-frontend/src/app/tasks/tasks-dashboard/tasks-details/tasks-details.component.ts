@@ -17,6 +17,7 @@ import { StatusService } from '../../../_services/status.service';
 import { PriorityService } from '../../../_services/priority.service';
 import { CreateTaskDto } from '../../../_dtos/create-task-dto';
 import { AuthService } from '../../../_services/auth.service';
+import { DialogService } from '../../../_services/dialog.service';
 
 @Component({
     selector: 'app-tasks-details',
@@ -47,11 +48,12 @@ export class TasksDetailsComponent implements OnInit {
 
     constructor(private _route: ActivatedRoute,
                 private _router: Router,
-                private _taskService: TasksService,
+                private _tasksService: TasksService,
                 private _statusService: StatusService,
                 private _priorityService: PriorityService,
                 private _authService: AuthService,
-                private _fb: FormBuilder
+                private _fb: FormBuilder,
+                private _dialogService: DialogService
     ) {
         this.taskDetails = {
             id: 0,
@@ -155,15 +157,19 @@ export class TasksDetailsComponent implements OnInit {
             return;
         }
 
-        const isSuccessful = await this._taskService.deleteTask(taskId);
+        const isSuccessful = await this._tasksService.deleteTask(taskId);
 
         if (isSuccessful) {
-            await this._taskService.loadTasks(this._authService.loggedInUser()!.userId);
+            await this._tasksService.loadTasks(this._authService.loggedInUser()!.userId);
             this._router.navigate(['./tasks/tasks-dashboard']);
+            this._dialogService.message('Task deleted successfully.');
+        }
+        else {
+            this._dialogService.message('Task deletion failed.');
         }
     }
 
     private async _getTaskDetails(taskId: number) {
-        this.taskDetails = await this._taskService.getTaskDetails(taskId);
+        this.taskDetails = await this._tasksService.getTaskDetails(taskId);
     }
 }
