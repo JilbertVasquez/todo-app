@@ -1,3 +1,6 @@
+using todo_app_client.Api.Data.Dtos.PriorityDtos;
+using todo_app_client.Api.Data.Dtos.StatusDtos;
+
 namespace todo_app_client.Api.Data.Dtos.TaskDtos
 {
     public class UpdateTaskDto
@@ -8,8 +11,8 @@ namespace todo_app_client.Api.Data.Dtos.TaskDtos
 
         public string Note { get; set; } = default!;
 
-        public int PriorityId { get; set; } = default!;
+        public PriorityDto Priority { get; set; } = default!;
 
-        public int StatusId { get; set; } = default!;
+        public StatusDto Status { get; set; } = default!;
     }
 }

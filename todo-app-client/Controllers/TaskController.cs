@@ -122,13 +122,13 @@ namespace todo_app_client.Api.Controllers
             // Update task properties
             task.Title = taskDto.Title;
             task.Note = taskDto.Note;
-            task.PriorityId = taskDto.PriorityId;
-            task.StatusId = taskDto.StatusId;
+            task.PriorityId = taskDto.Priority.PriorityId;
+            task.StatusId = taskDto.Status.StatusId;
 
             // Save changes to the database
             await _db.SaveChangesAsync();
 
-            return NoContent(); // Indicates that the update was successful but no content to return
+            return Ok(true);
         }
 
         [HttpDelete("delete/{taskId}")]

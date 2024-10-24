@@ -18,6 +18,7 @@ import { PriorityService } from '../../../_services/priority.service';
 import { CreateTaskDto } from '../../../_dtos/create-task-dto';
 import { AuthService } from '../../../_services/auth.service';
 import { DialogService } from '../../../_services/dialog.service';
+import { UpdateTaskDto } from '../../../_dtos/update-task-dto';
 
 @Component({
     selector: 'app-tasks-details',
@@ -129,22 +130,21 @@ export class TasksDetailsComponent implements OnInit {
                 this._router.navigate(['./tasks/tasks-dashboard']);
 
             }
-
         } 
         else {
             this._dialogService.error("Form is invalid.");
         }
     }
 
-    update() {
+    async update() {
         const selectedPriority = this.priorities().find(prio => prio.priorityName === this.taskForm.value.priority);
         const selectedStatus = this.status().find(stat => stat.statusName === this.taskForm.value.status);
         const userId = this._authService.loggedInUser()?.userId;
+        const taskId = this.taskId;
 
-        if (this.taskForm.valid && selectedPriority && selectedStatus && userId) {
-            const updateTask: TaskDto = {
-                userId: userId,
-                id: this.taskId!,
+        if (this.taskForm.valid && selectedPriority && selectedStatus && userId && taskId) {
+            const updateTask: UpdateTaskDto = {
+                taskId: taskId,
                 title: this.taskForm.value.title,
                 note: this.taskForm.value.note,
 
@@ -157,6 +157,15 @@ export class TasksDetailsComponent implements OnInit {
                     statusName: selectedStatus.statusName
                 }
             };
+
+            const isSuccessful = await this._tasksService.updateTaskDetails(updateTask);
+
+            if (isSuccessful) {
+                await this._tasksService.loadTasks(userId);
+                this._dialogService.message('Task updated successfully.');
+                this._router.navigate(['./tasks/tasks-dashboard']);
+
+            }
         } 
         else {
             this._dialogService.error("Form is invalid.");
