@@ -15,7 +15,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     max-height: none !important;
 }
 
-.mat-mdc-snackbar-surface, .mat-mdc-snack-bar-label, .mdc-button__label {
+.mat-mdc-snackbar-surface, .mat-mdc-snack-bar-label {
     background-color: #101415 !important;
     color: white !important;
 }
