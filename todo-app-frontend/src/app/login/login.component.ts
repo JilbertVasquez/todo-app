@@ -31,7 +31,7 @@ export class LoginComponent {
 
     ngOnInit() { }
 
-    async submit() {
+    submit() {
         if (!this.isValidFields()) return;
 
         this.isBusy = true;
@@ -44,10 +44,16 @@ export class LoginComponent {
             password: password
         }
 
-        await this._auth.login(dto);
-
-        this._router.navigate(['/']);
-        this.isBusy = false;
+        this._auth.login(dto).then((user) => {
+            this._auth.loggedInUser.set(user);
+            this._auth.isLoggedIn = true;
+            this._dialog.message("Login successful.");
+            this._router.navigate(['/']);
+            this.isBusy = false;
+        }).catch((error) => {
+            this._dialog.error(error.statusText);
+            this._router.navigate(['/']);
+        })
     }
 
     private isValidFields(): boolean {

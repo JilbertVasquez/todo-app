@@ -52,10 +52,10 @@ namespace todo_app_client.Api.Controllers
         {
             var user = _db.Users.Where(x => x.Username == dto.Username && x.DeleteDate == null).FirstOrDefault();
 
-            if (user == null) return BadRequest("Invalid username.");
+            if (user == null) return Unauthorized();
 
             if (!BCrypt.Net.BCrypt.Verify(dto.Password, user.Password))
-                return BadRequest("Invalid password.");
+                return Unauthorized();
 
             var userDetails = new UserDetailsDto
             {
