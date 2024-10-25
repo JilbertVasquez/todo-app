@@ -38,3 +38,12 @@ Thumbs.db
 
 #Others
 ClientBin/
+
+# Files build by Visual Studio
+*.pdb
+
+#paket dependency manager
+.paket/paket.exe
+
+#Build Results of an ATL Project
+dlldata.c
