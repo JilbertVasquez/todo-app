@@ -35,7 +35,7 @@ namespace todo_app_client.Api.Controllers
             if (string.IsNullOrEmpty(dto.Email)) return BadRequest("Invalid email.");
 
             if (await _db.Users.AnyAsync(x => (x.Username == dto.Username || x.Email == dto.Email) && x.DeleteDate == null))
-                throw new Exception("Username or email is already taken.");
+                return Conflict("Username or email is already taken.");
 
             var user = new User(dto)
             {

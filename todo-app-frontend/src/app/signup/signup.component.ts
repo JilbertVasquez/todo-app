@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DialogService } from '../_services/dialog.service';
 import { SignUpDto } from '../_dtos/signup-dto';
-import { last } from 'rxjs';
 import { AuthService } from '../_services/auth.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
@@ -56,12 +55,13 @@ export class SignupComponent implements OnInit {
         }
 
         const response = this._auth.signup(dto);
-        response.then((user: SignUpDto) => {
-            this._dialogService.message('Successfully registered ' + user.username);
+        response.then(() => {
+            this._dialogService.message('Successfully registered ' + dto.username);
+            this._router.navigate(['./login']);
             this.isBusy = false;
-        })
-        .catch((error) => {
-            this._dialogService.error(error);
+        }).catch((error) => {
+            this._dialogService.error(error.error);
+            this._router.navigate(['']);
         })
     }
 
