@@ -48,30 +48,9 @@ ClientBin/
 #Build Results of an ATL Project
 dlldata.c
 
-# 
-*.binlog
-/todo-app-client/bin/
-/todo-app-client/obj/
-
-/todo-app-client/todo-app-client.dll
-todo-app-client/bin/Debug/net8.0/todo-app-client.dll
-todo-app-client/bin/Debug/net8.0/todo-app-client.exe
-todo-app-client/bin/Debug/net8.0/todo-app-client.pdb
-todo-app-client/obj/Debug/net8.0/apphost.exe
-todo-app-client/obj/Debug/net8.0/todo-app-client.AssemblyInfo.cs
-todo-app-client/obj/Debug/net8.0/todo-app-client.AssemblyInfoInputs.cache
-todo-app-client/obj/Debug/net8.0/todo-app-client.dll
-todo-app-client/obj/Debug/net8.0/todo-app-client.pdb
-todo-app-client/obj/Debug/net8.0/todo-app-client.sourcelink.json
-todo-app-client/obj/Debug/net8.0/ref/todo-app-client.dll
-todo-app-client/obj/Debug/net8.0/refint/todo-app-client.dll
-
-/bin/
-
-
 # Ignore everything in the bin folder of the todo-app-client project
 /todo-app-client/bin/
 
 # Ignore all other build outputs and temporary files for ASP.NET Core
-/todo-app-client/ojt/
-/ojt/
+/todo-app-client/obj/
+/obj/
