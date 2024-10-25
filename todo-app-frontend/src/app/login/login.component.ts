@@ -22,7 +22,7 @@ export class LoginComponent {
     form: FormGroup;
     isBusy = false;
 
-    constructor(private _fb: FormBuilder, private _router: Router, private _dialog: DialogService, private _auth: AuthService) {
+    constructor(private _fb: FormBuilder, private _router: Router, private _dialogService: DialogService, private _auth: AuthService) {
         this.form = this._fb.group({
             username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(18)]],
             password: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(36)]],
@@ -47,11 +47,11 @@ export class LoginComponent {
         this._auth.login(dto).then((user) => {
             this._auth.loggedInUser.set(user);
             this._auth.isLoggedIn = true;
-            this._dialog.message("Login successful.");
+            this._dialogService.message("Login successful.");
             this._router.navigate(['/']);
             this.isBusy = false;
         }).catch((error) => {
-            this._dialog.error(error.statusText);
+            this._dialogService.error(error.statusText);
             this._router.navigate(['/']);
         })
     }
@@ -61,12 +61,12 @@ export class LoginComponent {
         const password = this.form.get('password')?.value;
 
         if (username === null || username.length < 3 || username > 18) {
-            this._dialog.error('Username is invalid');
+            this._dialogService.error('Username is invalid');
             return false;
         }
 
         if (password === null || password.length < 3 || password > 36) {
-            this._dialog.error('Password is invalid');
+            this._dialogService.error('Password is invalid');
             return false;
         }
 

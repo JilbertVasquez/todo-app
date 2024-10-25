@@ -23,7 +23,7 @@ export class SignupComponent implements OnInit {
     form: FormGroup;
     isBusy = false;
 
-    constructor(private _fb: FormBuilder, private _router: Router, private _dialog: DialogService, private _auth: AuthService) {
+    constructor(private _fb: FormBuilder, private _router: Router, private _dialogService: DialogService, private _auth: AuthService) {
         this.form = this._fb.group({
             firstname: ['', [Validators.required]],
             lastname: ['', [Validators.required]],
@@ -57,11 +57,11 @@ export class SignupComponent implements OnInit {
 
         const response = this._auth.signup(dto);
         response.then((user: SignUpDto) => {
-            this._dialog.message('Successfully registered ' + user.username);
+            this._dialogService.message('Successfully registered ' + user.username);
             this.isBusy = false;
         })
         .catch((error) => {
-            this._dialog.error(error);
+            this._dialogService.error(error);
         })
     }
 
@@ -74,27 +74,27 @@ export class SignupComponent implements OnInit {
         const retypePassword = this.form.get('retypePassword')?.value;
 
         if (firstname === null || lastname === null) {
-            this._dialog.error('Please enter your name');
+            this._dialogService.error('Please enter your name');
             return false;
         }
 
         if (username === null || username.length < 3 || username > 18) {
-            this._dialog.error('Username is invalid');
+            this._dialogService.error('Username is invalid');
             return false;
         }
 
         if (password === null || password.length < 8 || password > 36 || retypePassword === null || retypePassword.length < 8 || retypePassword > 36) {
-            this._dialog.error('Password is invalid');
+            this._dialogService.error('Password is invalid');
             return false;
         }
 
         if (password !== retypePassword) {
-            this._dialog.error('Password does not match');
+            this._dialogService.error('Password does not match');
             return false;
         }
 
         if (email === null) {
-            this._dialog.error('Email is invalid');
+            this._dialogService.error('Email is invalid');
             return false;
         }
 
