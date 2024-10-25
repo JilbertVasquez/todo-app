@@ -65,3 +65,13 @@ todo-app-client/obj/Debug/net8.0/todo-app-client.pdb
 todo-app-client/obj/Debug/net8.0/todo-app-client.sourcelink.json
 todo-app-client/obj/Debug/net8.0/ref/todo-app-client.dll
 todo-app-client/obj/Debug/net8.0/refint/todo-app-client.dll
+
+/bin/
+
+
+# Ignore everything in the bin folder of the todo-app-client project
+/todo-app-client/bin/
+
+# Ignore all other build outputs and temporary files for ASP.NET Core
+/todo-app-client/ojt/
+/ojt/
