@@ -5,8 +5,6 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment.development";
 import { LoginDto } from "../_dtos/login-dto";
 import { UserProfile } from "../_dtos/user-profile-dto";
-import { DialogService } from "./dialog.service";
-
 @Injectable({
     providedIn: 'root'
 })

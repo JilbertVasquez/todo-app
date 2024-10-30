@@ -8,4 +8,4 @@ import { TasksDetailsComponent } from '../tasks-details/tasks-details.component'
     templateUrl: './create-task.component.html',
     styleUrl: './create-task.component.css',
 })
-export class CreateTaskComponent {}
+export class CreateTaskComponent { }

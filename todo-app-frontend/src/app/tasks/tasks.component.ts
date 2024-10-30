@@ -8,4 +8,4 @@ import {RouterOutlet} from '@angular/router';
     templateUrl: './tasks.component.html',
     styleUrl: './tasks.component.css',
 })
-export class TasksComponent {}
+export class TasksComponent { }

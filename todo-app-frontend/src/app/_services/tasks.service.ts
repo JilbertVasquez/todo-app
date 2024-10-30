@@ -1,7 +1,7 @@
 import { Injectable, signal } from "@angular/core";
 import { environment } from "../../environments/environment.development";
 import { HttpClient } from "@angular/common/http";
-import { last, lastValueFrom } from "rxjs";
+import { lastValueFrom } from "rxjs";
 import { TaskListDto } from "../_dtos/task-list-dto";
 import { TaskDto } from "../_dtos/task-dto";
 import { CreateTaskDto } from "../_dtos/create-task-dto";
