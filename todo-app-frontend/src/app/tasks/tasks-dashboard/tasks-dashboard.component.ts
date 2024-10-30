@@ -18,4 +18,4 @@ import {TasksListsComponent} from './tasks-lists/tasks-lists.component';
     templateUrl: './tasks-dashboard.component.html',
     styleUrl: './tasks-dashboard.component.css',
 })
-export class TasksDashboardComponent {}
+export class TasksDashboardComponent { }

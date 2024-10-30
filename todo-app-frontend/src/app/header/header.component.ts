@@ -23,7 +23,7 @@ import { AuthService } from '../_services/auth.service';
 })
 export class HeaderComponent {
 
-    constructor(private _router: Router, public authSerivce: AuthService) {}
+    constructor(private _router: Router, public authSerivce: AuthService) { }
 
     login() {
         this._router.navigate(['/login']);
@@ -35,6 +35,7 @@ export class HeaderComponent {
 
     logout() {
         this.authSerivce.isLoggedIn = false;
+        this.authSerivce.loggedInUser.set(null);
         this._router.navigate(['/']);
     }
 }

@@ -113,10 +113,10 @@ export class TasksDetailsComponent implements OnInit {
                 note: this.taskForm.value.note,
 
                 priority: {
-                    priorityId: selectedPriority.priorityId, 
+                    priorityId: selectedPriority.priorityId,
                     priorityName: selectedPriority.priorityName
                 },
-                status: { 
+                status: {
                     statusId: selectedStatus.statusId,
                     statusName: selectedStatus.statusName
                 }
@@ -128,9 +128,8 @@ export class TasksDetailsComponent implements OnInit {
                 await this._tasksService.loadTasks(userId);
                 this._dialogService.message('Task added successfully.');
                 this._router.navigate(['./tasks/tasks-dashboard']);
-
             }
-        } 
+        }
         else {
             this._dialogService.error("Form is invalid.");
         }
@@ -147,12 +146,11 @@ export class TasksDetailsComponent implements OnInit {
                 taskId: taskId,
                 title: this.taskForm.value.title,
                 note: this.taskForm.value.note,
-
                 priority: {
-                    priorityId: selectedPriority.priorityId, 
+                    priorityId: selectedPriority.priorityId,
                     priorityName: selectedPriority.priorityName
                 },
-                status: { 
+                status: {
                     statusId: selectedStatus.statusId,
                     statusName: selectedStatus.statusName
                 }
@@ -164,9 +162,8 @@ export class TasksDetailsComponent implements OnInit {
                 await this._tasksService.loadTasks(userId);
                 this._dialogService.message('Task updated successfully.');
                 this._router.navigate(['./tasks/tasks-dashboard']);
-
             }
-        } 
+        }
         else {
             this._dialogService.error("Form is invalid.");
         }
