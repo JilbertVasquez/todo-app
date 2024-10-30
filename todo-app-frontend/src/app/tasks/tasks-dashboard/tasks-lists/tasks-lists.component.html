@@ -16,7 +16,7 @@
                     <form>
                         <mat-form-field appearance="fill">
                             <mat-label>Select Priority</mat-label>
-                            <mat-select [(ngModel)]="selectedPriority" (selectionChange)="onPriorityChange()" name="priority">
+                            <mat-select [(ngModel)]="selectedPriority" name="priority">
                                 <mat-option *ngFor="let prio of priorities()" [value]="prio.priorityName">{{prio.priorityName}}</mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -25,7 +25,7 @@
                     <form>
                         <mat-form-field appearance="fill">
                             <mat-label>Select Status</mat-label>
-                            <mat-select [(ngModel)]="selectedStatus" (selectionChange)="onStatusChange()" name="status">
+                            <mat-select [(ngModel)]="selectedStatus" name="status">
                                 <mat-option *ngFor="let stat of status()" [value]="stat.statusName">{{stat.statusName}}</mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -37,7 +37,7 @@
                 <mat-card
                     appearance="outlined"
                     class="w-[330px] min-h-[180px] max-h-[180px]"
-                    *ngFor="let task of filteredTaskList"
+                    *ngFor="let task of filteredTaskList()"
                     >
                     <mat-card-header>
                         <div class="flex items-center justify-center] w-full">

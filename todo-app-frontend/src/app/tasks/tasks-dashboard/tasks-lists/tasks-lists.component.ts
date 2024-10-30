@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {Component, computed, OnInit, Signal} from '@angular/core';
+import {Component, computed, OnInit, signal } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
@@ -54,11 +54,16 @@ export class TasksListsComponent implements OnInit {
         return [...status, { statusName: 'All', statusId: status.length + 1 }];
     })
 
-    selectedPriority: string = 'All';
-    selectedStatus: string = 'All';
-    taskList: Signal<TaskListDto[]>;    // refactor this soon, make it computed and adjust the filteredTaskList in deletion to make it reactive
-    filteredTaskList: TaskListDto[] = [];
-    inputValue: string = '';
+    selectedPriority = signal<string>('All');
+    selectedStatus = signal<string>('All');
+    filteredTaskList = computed(() => {
+        const taskList = this._tasksService.taskList();
+
+        if (!taskList.length) return [];
+
+        return this._filterTasks(this.inputValue(), this.selectedPriority(), this.selectedStatus(), taskList);
+    })
+    inputValue = signal<string>('');
 
     constructor(
         private _tasksService: TasksService,
@@ -68,10 +73,7 @@ export class TasksListsComponent implements OnInit {
         private _route: ActivatedRoute,
         private _statusService: StatusService,
         private _priorityService: PriorityService
-    ) {
-        this.taskList = _tasksService.taskList.asReadonly();
-        this.filteredTaskList = this.taskList();
-    }
+    ) { }
 
     ngOnInit() { }
 
@@ -85,43 +87,28 @@ export class TasksListsComponent implements OnInit {
         if (isSuccessful) {
             await this._tasksService.loadTasks(this._authService.loggedInUser()!.userId);
             this._dialogService.message('Task deleted successfully.');
-            this.filteredTaskList = this.taskList();
         }
         else {
             this._dialogService.message('Task deletion failed.');
         }
     }
 
-    // createTask() {
-    //     this._router.navigate(['/tasks/create-task']);
-    // }
-
     getFilterInput(event: Event) {
-        this.inputValue = (event.target as HTMLInputElement).value;
-
-        this._filterTasks();
+        this.inputValue.set((event.target as HTMLInputElement).value);
     }
 
-    onPriorityChange() {
-        this._filterTasks();
-    }
-
-    onStatusChange() {
-        this._filterTasks();
-    }
-
-    private _filterTasks() {
-        this.filteredTaskList = this.taskList().filter(task => {
+    private _filterTasks(inputValue: string, selectedPriority: string, selectedStatus: string, taskList: TaskListDto[]) {
+        return taskList.filter(task => {
             const filteredTitle = task.title
                 .toLowerCase()
-                .includes(this.inputValue.toLowerCase());
+                .includes(inputValue.toLowerCase());
             const filteredPriority =
-                this.selectedPriority.toLowerCase() === 'all' ||
+                selectedPriority.toLowerCase() === 'all' ||
                 task.priorityName.toLowerCase() ===
-                    this.selectedPriority.toLowerCase();
+                    selectedPriority.toLowerCase();
             const filteredStatus =
-                this.selectedStatus.toLowerCase() === 'all' ||
-                task.statusName.toLowerCase() === this.selectedStatus.toLowerCase();
+                selectedStatus.toLowerCase() === 'all' ||
+                task.statusName.toLowerCase() === selectedStatus.toLowerCase();
 
             return filteredTitle && filteredPriority && filteredStatus;
         });
