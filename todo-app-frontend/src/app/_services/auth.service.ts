@@ -4,7 +4,7 @@ import { lastValueFrom } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment.development";
 import { LoginDto } from "../_dtos/login-dto";
-import { UserProfile } from "../_dtos/user-profile-dto";
+import { ResponseData, UserProfile } from "../_dtos/user-profile-dto";
 @Injectable({
     providedIn: 'root'
 })
@@ -20,6 +20,6 @@ export class AuthService {
     }
 
     login(dto: LoginDto) {
-        return lastValueFrom(this._http.post<UserProfile>(this._baseUrl + '/login', dto));
+        return lastValueFrom(this._http.post<ResponseData<UserProfile>>(this._baseUrl + '/login', dto));
     }
 }

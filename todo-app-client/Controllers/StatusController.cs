@@ -23,12 +23,12 @@ namespace todo_app_client.Api.Controllers
         public async Task<ActionResult<IEnumerable<StatusDto>>> GetStatusList()
         {
             var status = await _db.Status
-             .Select(p => new StatusDto
-             {
-                 StatusId = p.StatusId,
-                 StatusName = p.StatusName
-             })
-             .ToListAsync();
+                .Select(p => new StatusDto
+                {
+                    StatusId = p.StatusId,
+                    StatusName = p.StatusName
+                })
+                .ToListAsync();
 
             return Ok(status);
         }
