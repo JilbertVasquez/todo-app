@@ -5,21 +5,42 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment.development";
 import { LoginDto } from "../_dtos/login-dto";
 import { ResponseData, UserProfile } from "../_dtos/user-profile-dto";
+import { JwtHelperService } from "@auth0/angular-jwt";
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
     private _baseUrl = environment.apiUrl + '/api/user';
-    isLoggedIn = false;
+    private _TodoAppTokenKey = 'Todo-App-Token';
+    isLoggedIn = signal(false);
     loggedInUser = signal<UserProfile | null>(null);
 
-    constructor(private _http: HttpClient) { }
+    constructor(private _http: HttpClient, private _jwtHelper: JwtHelperService) {
+        const token = localStorage.getItem(this._TodoAppTokenKey);
+        if (!token) return;
+        this.isLoggedIn.set(!this._jwtHelper.isTokenExpired(token));
+    }
 
     signup(dto: SignUpDto): Promise<SignUpDto> {
         return lastValueFrom(this._http.post<SignUpDto>(this._baseUrl + '/register', dto));
     }
 
     login(dto: LoginDto) {
-        return lastValueFrom(this._http.post<ResponseData<UserProfile>>(this._baseUrl + '/login', dto));
+        return lastValueFrom(this._http.post(this._baseUrl + '/login', dto));
+    }
+
+    getUser() {
+        const token = localStorage.getItem(this._TodoAppTokenKey);
+        if (!token) {
+            this.loggedInUser.set(null);
+            return;
+        }
+        const user = this._jwtHelper.decodeToken(token);
+        const userProfile: UserProfile = {
+            userId: user.nameid,
+            username: user.unique_name
+        }
+        this.loggedInUser.set(userProfile);
+        console.log(this.loggedInUser());
     }
 }

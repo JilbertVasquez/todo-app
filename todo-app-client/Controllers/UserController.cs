@@ -62,11 +62,11 @@ namespace todo_app_client.Api.Controllers
             if (!BCrypt.Net.BCrypt.Verify(dto.Password, user.Password))
                 return Unauthorized();
 
-            var userDetails = new UserDetailsDto
-            {
-                UserId = user.UserId,
-                Username = user.Username 
-            };
+            // var userDetails = new UserDetailsDto
+            // {
+            //     UserId = user.UserId,
+            //     Username = user.Username 
+            // };
 
             var claims = new List<Claim>
             {
@@ -77,7 +77,7 @@ namespace todo_app_client.Api.Controllers
 
             var token = _ag.EncodeToken(claims);
 
-            return Ok(new { userDetails, token});
+            return Ok( new {token});
         }
     }
 }

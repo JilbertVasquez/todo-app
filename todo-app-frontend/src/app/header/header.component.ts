@@ -34,8 +34,8 @@ export class HeaderComponent {
     }
 
     logout() {
-        this.authSerivce.isLoggedIn = false;
-        this.authSerivce.loggedInUser.set(null);
+        localStorage.removeItem('Todo-App-Token');
+        this.authSerivce.isLoggedIn.set(false);
         this._router.navigate(['/']);
     }
 }
