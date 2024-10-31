@@ -15,6 +15,8 @@ builder.SetupDataContext(appSettings);
 builder.AddAuth(appSettings);
 builder.AddAppServices();
 
+builder.Services.AddHttpContextAccessor();
+
 var app = builder.Build();
 
 app.UseCors(corsPolicyName);
