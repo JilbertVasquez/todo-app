@@ -26,6 +26,8 @@ namespace todo_app_client.Api.Models
         [Required, EmailAddress]
         public string Email { get; set; } = default!;
 
+        public string Role { get; set; } = default!;
+
         public DateTime? CreateDate { get; set; }
 
         public DateTime? DeleteDate { get; set; }
@@ -42,6 +44,7 @@ namespace todo_app_client.Api.Models
             Username = dto.Username;
             Password = BCrypt.Net.BCrypt.HashPassword(dto.Password, 11);
             Email = dto.Email;
+            Role = "User";
             CreateDate = DateTime.Today;
         }
     }
