@@ -62,7 +62,7 @@ namespace todo_app_client.Api.Controllers
             if (!BCrypt.Net.BCrypt.Verify(dto.Password, user.Password))
                 return Unauthorized();
 
-            // var userDetails = new UserDetailsDto
+            // var userDetails = new UserProfileDto
             // {
             //     UserId = user.UserId,
             //     Username = user.Username 

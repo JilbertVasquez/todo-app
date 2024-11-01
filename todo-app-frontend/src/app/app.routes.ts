@@ -7,6 +7,7 @@ import { loadStatusResolver } from './_resolvers/status-resolver';
 import { loadPriorityResolver } from './_resolvers/priority-resolver';
 import { loadTasksResolver } from './_resolvers/tasks-resolver';
 import { UserDetailsResolver } from './_resolvers/user-details-resolver';
+import { AdminGuard } from './_guards/admin.guard';
 
 export const routes: Routes = [
     {
@@ -35,7 +36,7 @@ export const routes: Routes = [
     {
         path: 'admin',
         loadChildren: () => import ('./admin/admin-routing.module'),
-        canActivate: [AuthGuard],
+        canActivate: [AdminGuard],
         resolve: {
             userDetails: UserDetailsResolver,
         }

@@ -1,4 +1,5 @@
 using AutoMapper;
+using todo_app_client.Api.Data.Dtos;
 using todo_app_client.Api.Data.Dtos.UserDtos;
 using todo_app_client.Api.Models;
 
@@ -13,6 +14,6 @@ public class AutoMapperProfile: Profile
 
     private void MapUsers()
     {
-        CreateMap<User, UserDetailsDto>();
+        CreateMap<User, UserForListDto>();
     }
 }

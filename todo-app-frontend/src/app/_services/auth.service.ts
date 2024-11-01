@@ -16,7 +16,7 @@ export class AuthService {
     loggedInUser = signal<UserProfile | null>(null);
 
     constructor(private _http: HttpClient, private _jwtHelper: JwtHelperService) {
-        const token = localStorage.getItem(this._TodoAppTokenKey);
+        const token = this._getToken();
         if (!token) return;
         this.isLoggedIn.set(!this._jwtHelper.isTokenExpired(token));
     }
@@ -30,17 +30,31 @@ export class AuthService {
     }
 
     getUser() {
-        const token = localStorage.getItem(this._TodoAppTokenKey);
+        const token = this._getToken();
         if (!token) {
             this.loggedInUser.set(null);
             return;
         }
-        const user = this._jwtHelper.decodeToken(token);
+        const user = this._decodeToken(token);
         const userProfile: UserProfile = {
             userId: user.nameid,
             username: user.unique_name
         }
         this.loggedInUser.set(userProfile);
-        console.log(this.loggedInUser());
+    }
+
+    getUserRole() {
+        const token = this._getToken();
+        if (!token) return;
+        const userRole = this._decodeToken(token);
+        return userRole.role;
+    }
+
+    private _getToken() {
+        return localStorage.getItem(this._TodoAppTokenKey);
+    }
+
+    private _decodeToken(token: string) {
+        return this._jwtHelper.decodeToken(token);
     }
 }
