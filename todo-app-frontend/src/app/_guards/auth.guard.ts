@@ -14,10 +14,10 @@ export class AuthGuard {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ) {
-        if(!this._auth.isLoggedIn) {
+        if(!this._auth.isLoggedIn()) {
             this._dialogService.error('Login first.');
             return false;
         }
-        return this._auth.isLoggedIn;
+        return this._auth.isLoggedIn();
     }
 }

@@ -12,14 +12,18 @@ var appSettings = builder.SetupAppSettings();
 var corsPolicyName = builder.SetupCors();
 
 builder.SetupDataContext(appSettings);
+builder.AddAuth(appSettings);
 builder.AddAppServices();
+
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
 app.UseCors(corsPolicyName);
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

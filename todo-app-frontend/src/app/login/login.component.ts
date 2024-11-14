@@ -44,9 +44,10 @@ export class LoginComponent {
             password: password
         }
 
-        this._auth.login(dto).then((user) => {
-            this._auth.loggedInUser.set(user);
-            this._auth.isLoggedIn = true;
+        this._auth.login(dto).then((res: any) => {
+            localStorage.setItem('Todo-App-Token', res.token);
+            this._auth.getUser();
+            this._auth.isLoggedIn.set(true);
             this._dialogService.message("Login successful.");
             this._router.navigate(['/']);
             this.isBusy = false;

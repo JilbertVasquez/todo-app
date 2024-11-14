@@ -1,10 +1,12 @@
 
+using System.Security.Claims;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using todo_app_client.Api.Data;
 using todo_app_client.Api.Data.Dtos.UserDtos;
 using todo_app_client.Api.Models;
+using todo_app_client.Helpers;
 
 namespace todo_app_client.Api.Controllers
 {
@@ -15,14 +17,17 @@ namespace todo_app_client.Api.Controllers
     {
         private readonly IMapper _mapper;
         private readonly DataContext _db;
+        private readonly IAuthGuard _ag;
 
         public UserController(
             IMapper mapper,
-            DataContext db
+            DataContext db,
+            IAuthGuard ag
         )
         {
             _mapper = mapper;
             _db = db;
+            _ag = ag;
         }
 
         [HttpPost("Register")]
@@ -57,13 +62,22 @@ namespace todo_app_client.Api.Controllers
             if (!BCrypt.Net.BCrypt.Verify(dto.Password, user.Password))
                 return Unauthorized();
 
-            var userDetails = new UserDetailsDto
+            // var userDetails = new UserProfileDto
+            // {
+            //     UserId = user.UserId,
+            //     Username = user.Username 
+            // };
+
+            var claims = new List<Claim>
             {
-                UserId = user.UserId,
-                Username = user.Username 
+                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
+                new Claim(ClaimTypes.Role, user.Role)
             };
 
-            return Ok(userDetails);
+            var token = _ag.EncodeToken(claims);
+
+            return Ok( new {token});
         }
     }
 }
