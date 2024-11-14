@@ -33,7 +33,7 @@ app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.WebRootPath, "browser"))
 });
-
+app.MapCustomFallbackToFile();
 app.UseAuthentication();
 app.UseAuthorization();
 
