@@ -2,7 +2,7 @@ import { Injectable, signal } from "@angular/core";
 import { SignUpDto } from "../_dtos/signup-dto";
 import { lastValueFrom } from "rxjs";
 import { HttpClient } from "@angular/common/http";
-import { environment } from "../../environments/environment.development";
+import { environment } from "../../environments/environment";
 import { LoginDto } from "../_dtos/login-dto";
 import { ResponseData, UserProfile } from "../_dtos/user-profile-dto";
 import { JwtHelperService } from "@auth0/angular-jwt";

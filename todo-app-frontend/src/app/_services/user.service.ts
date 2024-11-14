@@ -1,5 +1,5 @@
 import { Injectable, signal } from "@angular/core";
-import { environment } from "../../environments/environment.development";
+import { environment } from "../../environments/environment";
 import { UserProfile } from "../_dtos/user-profile-dto";
 import { HttpClient } from "@angular/common/http";
 import { lastValueFrom } from "rxjs";

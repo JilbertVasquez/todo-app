@@ -1,7 +1,7 @@
 import { Injectable, signal } from "@angular/core";
 import { lastValueFrom } from "rxjs";
 import { HttpClient } from "@angular/common/http";
-import { environment } from "../../environments/environment.development";
+import { environment } from "../../environments/environment";
 import { PriorityDto } from "../_dtos/priority-dto";
 
 @Injectable({
