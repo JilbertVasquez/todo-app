@@ -36,7 +36,7 @@ export const routes: Routes = [
     {
         path: 'admin',
         loadChildren: () => import ('./admin/admin-routing.module'),
-        canActivate: [AdminGuard],
+        canActivate: [AuthGuard, AdminGuard],
         resolve: {
             userDetails: UserDetailsResolver,
         }
