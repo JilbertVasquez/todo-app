@@ -1,3 +1,4 @@
+using Microsoft.Extensions.FileProviders;
 using todo_app_client.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +23,16 @@ var app = builder.Build();
 app.UseCors(corsPolicyName);
 
 // app.UseHttpsRedirection();
+
+app.UseDefaultFiles(new DefaultFilesOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.WebRootPath, "browser"))
+});
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.WebRootPath, "browser"))
+});
 
 app.UseAuthentication();
 app.UseAuthorization();

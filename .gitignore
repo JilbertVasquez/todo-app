@@ -54,3 +54,4 @@ dlldata.c
 # Ignore all other build outputs and temporary files for ASP.NET Core
 /todo-app-client/obj/
 /obj/
+wwwroot/
