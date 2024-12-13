@@ -31,12 +31,12 @@ jobs:
           cache-dependency-path: ./todo-app-frontend/package-lock.json
       
       - name: Build SPA frontend
-      working-directory: ./todo-app-frontend
-      run: |
-        pnpm install --no-frozen-lockfile
-        if [ ${{env.CONFIGURATION } == 'development'}]; then
-          echo "Building development version"
-        else
-          echo "Building production version"
-          pnpm run build
-        fi
+        working-directory: ./todo-app-frontend
+        run: |
+          pnpm install --no-frozen-lockfile
+          if [ "${{ env.CONFIGURATION }}" == "development" ]; then
+            echo "Building development version"
+          else
+            echo "Building production version"
+            pnpm run build
+          fi
